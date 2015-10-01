@@ -8,3 +8,23 @@ node {
   npmVersion = '2.1.5'
   download = true
 }
+
+task bowerInstall(type: NodeTask) {
+    script = file('node_modules/bower/bin/bower')
+    args = ['install']
+    inputs.files file('bower.json')
+    outputs.files file('bower_components')
+}
+
+ext.jsxArgs = ['src/jsx', '--out-dir', "${project.buildDir}/lib/"]
+
+task devMode << {
+    project.ext.jsxArgs.add(0, '--watch')
+}
+
+task compileJsx(type: NodeTask) {
+    script = file('node_modules/babel/bin/babel')
+    args = project.ext.jsxArgs
+}
+ 
+task build(dependsOn: ['npmInstall', 'bowerInstall', 'compileJsx'])

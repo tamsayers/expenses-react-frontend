@@ -1,0 +1,9 @@
+{
+  "name": "expenses-frontend",
+  "version": "0.1.0",
+  "devDependencies": {
+    "bower": "1.5.3",
+    "babel": "5.8.23",
+    "react": "0.13.3"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "name": "expenses-frontend",
+  "version": "0.1.0",
+  "dependencies": {
+    "react": "0.13.3"
+  },
+  "private": true
+}

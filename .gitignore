@@ -1,1 +1,8 @@
 .gradle/
+.settings/
+.DS_STORE
+.classpath
+.project
+build/
+node_modules/
+bower_components/
