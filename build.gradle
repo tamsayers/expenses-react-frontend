@@ -1,0 +1,10 @@
+plugins {
+  id 'eclipse'
+  id "com.moowork.node" version "0.11"
+}
+
+node {
+  version = '0.11.10'
+  npmVersion = '2.1.5'
+  download = true
+}
