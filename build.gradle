@@ -4,12 +4,12 @@ plugins {
 }
 
 node {
-  version = '0.11.10'
+  version = '4.1.1'
   npmVersion = '2.1.5'
   download = true
 }
 
-task bowerInstall(type: NodeTask) {
+task bowerInstall(type: NodeTask, dependsOn: 'npmInstall') {
     script = file('node_modules/bower/bin/bower')
     args = ['install']
     inputs.files file('bower.json')
@@ -18,13 +18,21 @@ task bowerInstall(type: NodeTask) {
 
 ext.jsxArgs = ['src/jsx', '--out-dir', "${project.buildDir}/lib/"]
 
-task devMode << {
-    project.ext.jsxArgs.add(0, '--watch')
+task watchJsx << {
+    jsxArgs.add(0, '--watch')
 }
 
-task compileJsx(type: NodeTask) {
+task compile(type: NodeTask) {
     script = file('node_modules/babel/bin/babel')
-    args = project.ext.jsxArgs
+    args = jsxArgs
+}
+
+task test(type: NpmTask, dependsOn: ['bowerInstall', 'compile']) {
+    args = ['test']
 }
  
-task build(dependsOn: ['npmInstall', 'bowerInstall', 'compileJsx'])
+task build(dependsOn: ['clean', 'test'])
+
+task clean(type: Delete) {
+    delete project.buildDir
+}
