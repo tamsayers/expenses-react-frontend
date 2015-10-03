@@ -1,15 +1,24 @@
+var InputText = React.createClass({
+  render: function() {
+    var name = this.props.name;
+    var className = "expense__" + name;
+    return (
+      <div className={className}>
+        <label htmlFor={name}>{this.props.children}</label>
+        <input type="text" name={name} value={this.props.value}/>
+      </div>
+    );
+  }
+});
+
 var Expense = React.createClass({
   render: function() {
     return (
       <fieldset className="expense">
-        <label htmlFor="date">Date</label>
-        <input className="expense__date" type="text" data-ng-model="expense.date" />
-        <label htmlFor="description">Description</label>
-        <input className="expense__description" type="text" data-ng-model="expense.description" />
-        <label htmlFor="clientName">Client Name</label>
-        <input className="expense__client-name" type="text" data-ng-model="expense.clientName" />
-        <label htmlFor="supplier">Supplier</label>
-        <input className="expense__supplier" type="text" data-ng-model="expense.supplier" />
+        <InputText name="date" value={this.props.data.date}>Date</InputText>
+        <InputText name="description" value={this.props.data.description}>Description</InputText>
+        <InputText name="clientName" value={this.props.data.clientName}>Client Name</InputText>
+        <InputText name="supplier" value={this.props.data.supplier}>Supplier</InputText>
         <label htmlFor="cost">Cost</label>
         <input className="expense__cost-amount" type="number" step="0.01" data-ng-model="expense.cost.amount" />
         <select className="expense__cost-type" data-ng-model="expense.cost.costType">
