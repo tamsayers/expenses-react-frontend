@@ -8,7 +8,7 @@ module.exports = React.createClass({
     this.setState({value: event.target.value});
   },
   render: function() {
-    var camelCaseToHyphenated = _ => _.replace(/(.)([A-Z])/, '$1-$2').toLowerCase();
+    var camelCaseToHyphenated = str => str.replace(/(.)([A-Z])/, '$1-$2').toLowerCase();
     var name = this.props.name;
     var className = this.props.block + "__" + camelCaseToHyphenated(this.props.name);
     return (
