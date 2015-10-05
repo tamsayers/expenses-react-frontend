@@ -1,4 +1,5 @@
-var InputText = require("./form/InputText.js");
+var React = require('react');
+var InputText = require("./form/InputTextWithLabel.js");
 
 var Expense = React.createClass({
   render: function() {

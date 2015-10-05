@@ -9,14 +9,8 @@ node {
   download = true
 }
 
-task bowerInstall(type: NodeTask, dependsOn: 'npmInstall') {
-    script = file('node_modules/bower/bin/bower')
-    args = ['install']
-    inputs.files file('bower.json')
-    outputs.files file('bower_components')
-}
-
-ext.jsxArgs = ['src/jsx', '--out-dir', "${project.buildDir}/lib/"]
+ext.libDir = "${project.buildDir}/lib/"
+ext.jsxArgs = ['src/jsx', '--out-dir', ext.libDir]
 
 task watchJsx << {
     jsxArgs.add(0, '--watch')
@@ -27,11 +21,14 @@ task compile(type: NodeTask) {
     args = jsxArgs
 }
 
-task test(type: NpmTask, dependsOn: ['bowerInstall', 'compile']) {
+task test(type: NpmTask, dependsOn: ['compile']) {
     args = ['test']
 }
  
-task build(dependsOn: ['clean', 'test'])
+task build(type: NodeTask, dependsOn: 'test') {
+    script = file('node_modules/browserify/bin/cmd')
+    args = ['-r', 'react', "$libDir/app.js", '-o', "$buildDir/bundle.js"]
+}
 
 task clean(type: Delete) {
     delete project.buildDir
