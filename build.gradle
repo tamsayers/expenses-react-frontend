@@ -13,34 +13,47 @@ ext {
     libDir = "${project.buildDir}/lib/"
     jsxDir = 'src/jsx'
     htmlDir = 'src/html'
+    appBuildDir = "$buildDir/app"
+    appBuildJsDir = "$appBuildDir/js"
+    jsBundleFile = "$buildDir/bundle.js"
 }
 
 task compileJsx(type: NodeTask, dependsOn: 'npmInstall') {
-    inputs.file jsxDir
+    inputs.dir jsxDir
+    outputs.dir libDir
+
     script = file('node_modules/babel/bin/babel')
     args = [jsxDir, '--out-dir', libDir]
 }
 
 task test(type: NpmTask, dependsOn: 'compileJsx') {
     inputs.file '__tests__'
+
     args = ['test']
 }
 
 task bundleJs(type: NodeTask, dependsOn: 'compileJsx') {
-    inputs.file libDir
+    inputs.dir libDir
+    outputs.file jsBundleFile
+
     script = file('node_modules/browserify/bin/cmd')
-    args = ['-r', 'react', "$libDir/app.js", '-o', "$buildDir/bundle.js"]
+    args = ['-r', 'react', "$libDir/app.js", '-o', jsBundleFile]
 }
 
 task copyHtml(type: Copy) {
-    inputs.file htmlDir
-    from 'src/html'
-    into "$buildDir/app"
+    inputs.dir htmlDir
+    outputs.dir appBuildDir
+
+    from htmlDir
+    into appBuildDir
 }
 
 task copyJs(type: Copy, dependsOn: 'bundleJs') {
-    from "$buildDir/bundle.js"
-    into "$buildDir/app/js"
+    inputs.file jsBundleFile
+    outputs.dir appBuildJsDir
+
+    from jsBundleFile
+    into appBuildJsDir
 }
 
 task build(type: Copy, dependsOn: ['test', 'copyHtml', 'copyJs'])

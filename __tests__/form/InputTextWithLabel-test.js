@@ -45,7 +45,6 @@ describe('InputText', function() {
     var input = node.querySelector('input');
     input.value = 'changed val';
     TestUtils.Simulate.change(input);
-
     expect(handleUpdate).toBeCalledWith('inputName', 'changed val');
   });
 });
