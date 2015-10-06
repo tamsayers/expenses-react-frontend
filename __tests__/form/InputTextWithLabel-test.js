@@ -46,6 +46,6 @@ describe('InputText', function() {
     input.value = 'changed val';
     TestUtils.Simulate.change(input);
 
-    expect(handleUpdate).toBeCalledWith('changed val');
+    expect(handleUpdate).toBeCalledWith('inputName', 'changed val');
   });
 });

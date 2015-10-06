@@ -10,15 +10,26 @@ module.exports = React.createClass({
     this.state.expenses.push({});
     this.setState({ expenses: this.state.expenses });
   },
+  updateExpense: function(i, propName, value) {
+    this.state.expenses[i][propName] = value;
+    this.setState({ expenses: this.state.expenses });
+  },
   submitExpenses: function(e) {
-    $.post(this.props.url, JSON.stringify(this.state.expenses));
+    $.ajax({
+      url: this.props.url,
+      method: 'POST',
+      data: JSON.stringify(this.state.expenses),
+      contentType: 'application/json',
+      dataType: 'json'});
+
     e.preventDefault();
   },
   render: function() {
+    var onChangeForExpense = i => this.updateExpense.bind(this, i);
     return (
       <form name="expenses-form" onSubmit={this.submitExpenses}>
-        {this.state.expenses.map(function(expense, index) {
-          return <AddExpense key={index} data={expense}/>
+        {this.state.expenses.map(function(expense, i) {
+          return <AddExpense key={i} data={expense} onChange={onChangeForExpense(i)}/>
         })}
         <button className="expenses-form__add-expense" type="button" onClick={this.newExpense} >Add</button>
         <button className="expenses-form__submit" type="submit">Submit</button>

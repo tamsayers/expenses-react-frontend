@@ -1,6 +1,13 @@
 var React = require('react');
 
 module.exports = React.createClass({
+  getInitialState: function() {
+    return {value: this.props.value};
+  },
+  handleChange: function(event) {
+    this.setState({value: event.target.value});
+    this.props.onChange(this.props.name, event.target.value);
+  },
   render: function() {
     var camelCaseToHyphenated = str => str.replace(/(.)([A-Z])/, '$1-$2').toLowerCase();
     var name = this.props.name;
@@ -8,7 +15,7 @@ module.exports = React.createClass({
     return (
       <div className={className}>
         <label htmlFor={name}>{this.props.children}</label>
-        <input type="text" name={name} value={this.props.value} onChange={e => this.props.onChange(e.target.value)}/>
+        <input type="text" name={name} value={this.state.value} onChange={this.handleChange}/>
       </div>
     );
   }
