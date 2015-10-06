@@ -1,16 +1,17 @@
 jest.dontMock('../../build/lib/form/InputTextWithLabel.js');
 
 describe('InputText', function() {
-  var $, component, node, TestUtils;
+  var $, component, node, TestUtils, handleUpdate;
 
   beforeEach(function() {
     $ = require('jquery');
     var React = require('react/addons');
     TestUtils = React.addons.TestUtils;
 
+    handleUpdate = jest.genMockFunction();
     var InputTextWithLabel = require('../../build/lib/form/InputTextWithLabel.js');
     component = TestUtils.renderIntoDocument(
-      <InputTextWithLabel block='bem-block' name='inputName' value='val'>Label Text</InputTextWithLabel>
+      <InputTextWithLabel block='bem-block' name='inputName' value='val' onChange={handleUpdate}>Label Text</InputTextWithLabel>
     );
 
     node = React.findDOMNode(TestUtils.findRenderedDOMComponentWithTag(component, 'div'));
@@ -45,6 +46,6 @@ describe('InputText', function() {
     input.value = 'changed val';
     TestUtils.Simulate.change(input);
 
-    expect(component.state.value).toEqual('changed val');
+    expect(handleUpdate).toBeCalledWith('changed val');
   });
 });
