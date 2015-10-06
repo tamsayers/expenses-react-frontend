@@ -1,7 +1,7 @@
 jest.dontMock('../../build/lib/form/InputTextWithLabel.js');
 
 describe('InputText', function() {
-  var $, component, DOM, TestUtils;
+  var $, component, node, TestUtils;
 
   beforeEach(function() {
     $ = require('jquery');
@@ -13,35 +13,35 @@ describe('InputText', function() {
       <InputTextWithLabel block='bem-block' name='inputName' value='val'>Label Text</InputTextWithLabel>
     );
 
-    DOM = React.findDOMNode(TestUtils.findRenderedDOMComponentWithTag(component, 'div'));
+    node = React.findDOMNode(TestUtils.findRenderedDOMComponentWithTag(component, 'div'));
   });
 
   it('renders a compnent with the correctly generated class', function() {
-    expect($(DOM).attr('class')).toEqual('bem-block__input-name');
+    expect($(node).attr('class')).toEqual('bem-block__input-name');
   });
 
   it('contains a label for component name', function() {
-    expect($(DOM).find('label').attr('for')).toEqual('inputName');
+    expect($(node).find('label').attr('for')).toEqual('inputName');
   });
 
   it('the label contains the given text', function() {
-    expect($(DOM).find('label').html()).toEqual('Label Text');
+    expect($(node).find('label').html()).toEqual('Label Text');
   });
 
   it('the input is of type text', function() {
-    expect($(DOM).find('input').attr('type')).toEqual('text');
+    expect($(node).find('input').attr('type')).toEqual('text');
   });
 
   it('the input name is the component name', function() {
-    expect($(DOM).find('input').attr('name')).toEqual('inputName');
+    expect($(node).find('input').attr('name')).toEqual('inputName');
   });
 
   it('the input value is the component value', function() {
-    expect($(DOM).find('input').val()).toEqual('val');
+    expect($(node).find('input').val()).toEqual('val');
   });
 
   it('the input value should update on state change', function() {
-    var input = DOM.querySelector('input');
+    var input = node.querySelector('input');
     input.value = 'changed val';
     TestUtils.Simulate.change(input);
 

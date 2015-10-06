@@ -24,11 +24,23 @@ task compile(type: NodeTask) {
 task test(type: NpmTask, dependsOn: ['compile']) {
     args = ['test']
 }
- 
-task build(type: NodeTask, dependsOn: 'test') {
+
+task bundleJs(type: NodeTask, dependsOn: 'compile') {
     script = file('node_modules/browserify/bin/cmd')
     args = ['-r', 'react', "$libDir/app.js", '-o', "$buildDir/bundle.js"]
 }
+
+task copyHtml(type: Copy) {
+    from 'src/html'
+    into "$buildDir/app"
+}
+
+task copyJs(type: Copy, dependsOn: 'bundleJs') {
+    from "$buildDir/bundle.js"
+    into "$buildDir/app/js"
+}
+
+task build(type: Copy, dependsOn: ['test', 'copyHtml', 'copyJs'])
 
 task clean(type: Delete) {
     delete project.buildDir
