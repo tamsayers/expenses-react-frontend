@@ -8,7 +8,7 @@ describe('ExpensesForm', function() {
     var React = require('react/addons');
     TestUtils = React.addons.TestUtils;
 
-    spyOn($, 'post');
+    spyOn($, 'ajax');
     
     var ExpensesForm = require('../build/lib/ExpensesForm.js');
     component = TestUtils.renderIntoDocument(
@@ -21,6 +21,13 @@ describe('ExpensesForm', function() {
   it('should post the expenses to the given url', function() {
     component.state.expenses[0].newValue = 'to submit';
     TestUtils.Simulate.submit(node);
-    expect($.post).toHaveBeenCalledWith('/expenses/endpoint', JSON.stringify(component.state.expenses));
+
+    expect($.ajax).toHaveBeenCalledWith({
+      url: '/expenses/endpoint',
+      method: 'POST',
+      data: JSON.stringify([{newValue:'to submit'}]),
+      contentType: 'application/json',
+      dataType: 'json'
+    });
   });
 });

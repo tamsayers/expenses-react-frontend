@@ -9,28 +9,31 @@ node {
   download = true
 }
 
-ext.libDir = "${project.buildDir}/lib/"
-ext.jsxArgs = ['src/jsx', '--out-dir', ext.libDir]
-
-task watchJsx << {
-    jsxArgs.add(0, '--watch')
+ext {
+    libDir = "${project.buildDir}/lib/"
+    jsxDir = 'src/jsx'
+    htmlDir = 'src/html'
 }
 
-task compile(type: NodeTask) {
+task compileJsx(type: NodeTask, dependsOn: 'npmInstall') {
+    inputs.file jsxDir
     script = file('node_modules/babel/bin/babel')
-    args = jsxArgs
+    args = [jsxDir, '--out-dir', libDir]
 }
 
-task test(type: NpmTask, dependsOn: ['compile']) {
+task test(type: NpmTask, dependsOn: 'compileJsx') {
+    inputs.file '__tests__'
     args = ['test']
 }
 
-task bundleJs(type: NodeTask, dependsOn: 'compile') {
+task bundleJs(type: NodeTask, dependsOn: 'compileJsx') {
+    inputs.file libDir
     script = file('node_modules/browserify/bin/cmd')
     args = ['-r', 'react', "$libDir/app.js", '-o', "$buildDir/bundle.js"]
 }
 
 task copyHtml(type: Copy) {
+    inputs.file htmlDir
     from 'src/html'
     into "$buildDir/app"
 }

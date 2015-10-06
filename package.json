@@ -1,5 +1,6 @@
 {
   "name": "expenses-frontend",
+  "description": "React version of expenses frontend",
   "version": "0.1.0",
   "devDependencies": {
     "react": "0.13.3",
