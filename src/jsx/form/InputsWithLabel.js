@@ -1,10 +1,5 @@
 var React = require('react');
 
-var changeHandler = component => function(event) {
-  component.setState({ value: event.target.value });
-  component.props.onChange(component.props.name, event.target.value);
-};
-
 var Input = React.createClass({
   getInitialState: function() {
     return { value: this.props.value };
