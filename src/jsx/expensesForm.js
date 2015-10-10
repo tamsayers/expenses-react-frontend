@@ -1,20 +1,27 @@
 var React = require('react');
 var $ = require('jquery');
-var AddExpense = require("./Expense.js");
+var AddExpense = require("./ExpenseInput.js");
 
 module.exports = React.createClass({
-  getInitialState: function() {
-    return { expenses: [{}] };
+  getInitialState() {
+    return { expenses: [{cost: {}}] };
   },
-  newExpense: function() {
-    this.state.expenses.push({});
+  newExpense() {
+    this.state.expenses.push({cost: {}});
     this.setState({ expenses: this.state.expenses });
   },
-  updateExpense: function(i, propName, value) {
-    this.state.expenses[i][propName] = value;
+  updateExpense: function(i, event) {
+    var setVal = function(obj, props) {
+      if (props.length > 1) {
+        setVal(obj[props.shift()], props);
+      } else {
+        obj[props[0]] = event.target.value;
+      }
+    };
+    setVal(this.state.expenses[i], event.target.name.split('.'));
     this.setState({ expenses: this.state.expenses });
   },
-  submitExpenses: function(e) {
+  submitExpenses(event) {
     $.ajax({
       url: this.props.url,
       method: 'POST',
@@ -22,9 +29,9 @@ module.exports = React.createClass({
       contentType: 'application/json',
       dataType: 'json'});
 
-    e.preventDefault();
+    event.preventDefault();
   },
-  render: function() {
+  render() {
     var onChangeForExpense = i => this.updateExpense.bind(this, i);
     return (
       <form name="expenses-form" onSubmit={this.submitExpenses}>

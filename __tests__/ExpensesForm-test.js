@@ -25,7 +25,7 @@ describe('ExpensesForm', function() {
     expect($.ajax).toHaveBeenCalledWith({
       url: '/expenses/endpoint',
       method: 'POST',
-      data: JSON.stringify([{newValue:'to submit'}]),
+      data: JSON.stringify([{cost:{},newValue:'to submit'}]),
       contentType: 'application/json',
       dataType: 'json'
     });

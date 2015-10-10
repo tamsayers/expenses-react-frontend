@@ -67,7 +67,7 @@ describe('InputsWithLabel', function() {
       input.value = 'changed val';
       TestUtils.Simulate.change(input);
   
-      expect(handleUpdate).toBeCalledWith('inputName', 'changed val');
+      expect(handleUpdate).toBeCalled();
     });
   });
 });
