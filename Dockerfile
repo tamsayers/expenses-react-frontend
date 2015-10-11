@@ -1,7 +1,5 @@
 FROM nginx
 
-ENV VERSION 0.1
-
 RUN rm /etc/nginx/conf.d/default.conf
 
 COPY deploy/nginx/nginx.conf /etc/nginx/nginx.conf

@@ -7,10 +7,12 @@ module.exports = React.createClass({
     return { expenses: [{cost: {}}] };
   },
   newExpense() {
-    this.state.expenses.push({cost: {}});
-    this.setState({ expenses: this.state.expenses });
+    this.setState(function(previousState, currentProps) {
+      previousState.expenses.push({cost: {}});
+      return {expenses: previousState.expenses};
+    });
   },
-  updateExpense: function(i, event) {
+  updateExpense(i, event) {
     var setVal = function(obj, props) {
       if (props.length > 1) {
         setVal(obj[props.shift()], props);
@@ -18,8 +20,10 @@ module.exports = React.createClass({
         obj[props[0]] = event.target.value;
       }
     };
-    setVal(this.state.expenses[i], event.target.name.split('.'));
-    this.setState({ expenses: this.state.expenses });
+    this.setState(function(previousState, currentProps) {
+      setVal(previousState.expenses[i], event.target.name.split('.'));
+      return {expenses: previousState.expenses};
+    });
   },
   submitExpenses(event) {
     $.ajax({
