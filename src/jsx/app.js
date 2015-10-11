@@ -1,5 +1,5 @@
 var React = require('react');
-var ExpensesForm = require('./ExpensesForm.js');
+var ExpensesForm = require('./form/ExpensesForm.js');
 
 React.render(
   <ExpensesForm url='/expenses' />,

@@ -1,6 +1,6 @@
 var React = require('react');
-var Inputs = require('./form/InputsWithLabel.js');
-var SelectOptions = require('./form/SelectOptions.js');
+var Inputs = require('./input/InputsWithLabel.js');
+var SelectOptions = require('./input/SelectOptions.js');
 
 module.exports = React.createClass({
   render() {

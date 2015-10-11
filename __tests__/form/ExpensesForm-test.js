@@ -1,4 +1,4 @@
-jest.dontMock('../build/lib/ExpensesForm.js');
+jest.dontMock('../../build/lib/form/ExpensesForm.js');
 
 describe('ExpensesForm', function() {
   var $, component, node, TestUtils;
@@ -10,7 +10,7 @@ describe('ExpensesForm', function() {
 
     spyOn($, 'ajax');
     
-    var ExpensesForm = require('../build/lib/ExpensesForm.js');
+    var ExpensesForm = require('../../build/lib/form/ExpensesForm.js');
     component = TestUtils.renderIntoDocument(
       <ExpensesForm url='/expenses/endpoint' />
     );

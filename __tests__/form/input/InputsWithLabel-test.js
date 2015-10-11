@@ -1,4 +1,4 @@
-jest.dontMock('../../build/lib/form/InputsWithLabel.js');
+jest.dontMock('../../../build/lib/form/input/InputsWithLabel.js');
 
 describe('InputsWithLabel', function() {
   var $ = require('jquery');
@@ -10,7 +10,7 @@ describe('InputsWithLabel', function() {
     TestUtils = React.addons.TestUtils;
 
     handleUpdate = jest.genMockFunction();
-    var InputsWithLabel = require('../../build/lib/form/InputsWithLabel.js');
+    var InputsWithLabel = require('../../../build/lib/form/input/InputsWithLabel.js');
     component = TestUtils.renderIntoDocument(
       <section>
         <InputsWithLabel.Text block='text' name='inputName' value='val' onChange={handleUpdate}>text label</InputsWithLabel.Text>
