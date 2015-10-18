@@ -3,19 +3,28 @@
   "description": "React version of expenses frontend",
   "version": "0.1.0",
   "devDependencies": {
-    "react": "0.13.3",
-    "jquery": "2.1.4",
-    "babel": "5.8.23",
-    "react": "0.13.3",
-    "babel-jest": "5.3.0",
-    "jest-cli": "0.5.8",
-    "browserify": "11.2.0"
+    "react": "latest",
+    "react-addons-test-utils": "latest",
+    "react-dom": "latest",
+    "jquery": "latest",
+    "babel": "latest",
+    "react": "latest",
+    "babel-jest": "latest",
+    "jest-cli": "latest",
+    "browserify": "latest",
+    "node-sass": "3.3.2",
+    "bower-installer": "latest"
   },
   "scripts": {
     "test": "jest"
   },
   "jest": {
     "scriptPreprocessor": "<rootDir>/node_modules/babel-jest",
-    "unmockedModulePathPatterns": ["<rootDir>/node_modules/react", "<rootDir>/node_modules/jquery"]
+    "unmockedModulePathPatterns": [
+      "<rootDir>/node_modules/react",
+      "<rootDir>/node_modules/react-dom",
+      "<rootDir>/node_modules/react-addons-test-utils",
+      "<rootDir>/node_modules/jquery"
+    ]
   }
 }

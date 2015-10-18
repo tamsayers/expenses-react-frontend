@@ -3,19 +3,15 @@ plugins {
   id "com.moowork.node" version "0.11"
 }
 
-node {
-  version = '4.1.1'
-  npmVersion = '2.1.5'
-  download = true
-}
-
 ext {
     libDir = "${project.buildDir}/lib/"
     jsxDir = 'src/jsx'
     htmlDir = 'src/html'
+    cssDir = 'src/css'
     appBuildDir = "$buildDir/app"
     appBuildJsDir = "$appBuildDir/js"
     jsBundleFile = "$buildDir/bundle.js"
+    cssBundleDir = "$appBuildDir/css"
 }
 
 task compileJsx(type: NodeTask, dependsOn: 'npmInstall') {
@@ -40,6 +36,22 @@ task bundleJs(type: NodeTask, dependsOn: 'compileJsx') {
     args = ['-r', 'react', "$libDir/app.js", '-o', jsBundleFile]
 }
 
+task bowerInstall(type: NodeTask, dependsOn: 'npmInstall') {
+    inputs.file 'bower.json'
+    outputs.dir cssDir
+
+    script = file('node_modules/bower-installer/bower-installer')
+    args = ['install']
+}
+
+task compileCss(type: NodeTask, dependsOn: 'bowerInstall') {
+    inputs.dir cssDir
+    outputs.dir cssBundleDir
+
+    script = file('node_modules/node-sass/bin/node-sass')
+    args = ["$cssDir/main.scss", '-o', cssBundleDir]
+}
+
 task copyHtml(type: Copy) {
     inputs.dir htmlDir
     outputs.dir appBuildDir
@@ -56,7 +68,7 @@ task copyJs(type: Copy, dependsOn: 'bundleJs') {
     into appBuildJsDir
 }
 
-task build(type: Copy, dependsOn: ['test', 'copyHtml', 'copyJs'])
+task build(type: Copy, dependsOn: ['test', 'copyHtml', 'copyJs', 'compileCss'])
 
 task clean(type: Delete) {
     delete project.buildDir

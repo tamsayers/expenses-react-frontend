@@ -1,0 +1,7 @@
+@import 'pure/pure';
+@import 'pure/grids-responsive';
+
+.myClass {
+  @extend .pure-g;
+  hidden: true;
+}

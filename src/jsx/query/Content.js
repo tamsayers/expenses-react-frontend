@@ -1,5 +1,6 @@
 var React = require('react');
 var QueryForm = require('./QueryForm.js');
+var ResultsTable = require('./ResultsTable.js');
 var $ = require('jquery');
 
 module.exports = React.createClass({
@@ -19,17 +20,15 @@ module.exports = React.createClass({
   },
   submitQuery(event) {
     event.preventDefault();
-    var query = this.state.query;
-    var params = [];
-    for (name in query) {
-      params.push(name + '=' + encodeURIComponent(query[name]));
-    }
-    console.log(params.join('&'));
+    $.get(this.props.url + '/' + this.state.query.from + '/to/' + this.state.query.till, function(data) {
+      this.setState({results: data});
+    }.bind(this));
   },
   render() {
     return (
       <div>
         <QueryForm query={this.state.query} onChange={this.queryChange} onSubmit={this.submitQuery}/>
+        <ResultsTable data={this.state.results} />
       </div>
     );
   }

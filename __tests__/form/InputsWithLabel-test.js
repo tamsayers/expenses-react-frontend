@@ -3,25 +3,25 @@ jest.dontMock('../../build/lib/form/InputsWithLabel.js');
 describe('InputsWithLabel', function() {
   var $ = require('jquery');
   var inputTypes = ['text', 'number'];
-  var component, nodes, TestUtils, handleUpdate;
+  var component, nodes, handleUpdate;
+  var TestUtils = require('react-addons-test-utils');
+  var React = require('react');
+  var ReactDOM = require('react-dom');
 
   beforeEach(function() {
-    var React = require('react/addons');
-    TestUtils = React.addons.TestUtils;
-
     handleUpdate = jest.genMockFunction();
     var InputsWithLabel = require('../../build/lib/form/InputsWithLabel.js');
-    component = TestUtils.renderIntoDocument(
-      <section>
-        <InputsWithLabel.Text block='text' name='inputName' value='val' onChange={handleUpdate}>text label</InputsWithLabel.Text>
-        <InputsWithLabel.Number block='number' name='inputName' value='val' onChange={handleUpdate}>number label</InputsWithLabel.Number>
-      </section>
+    
+    var textComponent = TestUtils.renderIntoDocument(
+      <InputsWithLabel.Text block='text' name='inputName' value='val' onChange={handleUpdate}>text label</InputsWithLabel.Text>
+    );
+    var numberComponent = TestUtils.renderIntoDocument(
+      <InputsWithLabel.Number block='number' name='inputName' value='val' onChange={handleUpdate}>number label</InputsWithLabel.Number>
     );
 
-    var nodeArray = TestUtils.scryRenderedDOMComponentsWithTag(component, 'div');
     nodes = {
-      'text': React.findDOMNode(nodeArray[0]),
-      'number': React.findDOMNode(nodeArray[1])
+      'text': ReactDOM.findDOMNode(textComponent),
+      'number': ReactDOM.findDOMNode(numberComponent)
     };
   });
 

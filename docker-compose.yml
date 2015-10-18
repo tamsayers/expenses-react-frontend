@@ -3,7 +3,7 @@ web:
   ports:
    - "8080:80"
   volumes:
-   - build/app/:/usr/share/nginx/html
+   - "./build/app/:/usr/share/nginx/html"
   links:
    - api
 api:
@@ -11,4 +11,4 @@ api:
   ports:
    - "9000:9000"
   volumes:
-   - ~/expenses/:/var/expenses/
+   - "~/expenses/:/var/expenses/"
