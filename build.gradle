@@ -68,7 +68,8 @@ task copyJs(type: Copy, dependsOn: 'bundleJs') {
     into appBuildJsDir
 }
 
-task build(type: Copy, dependsOn: ['test', 'copyHtml', 'copyJs', 'compileCss'])
+//task build(type: Copy, dependsOn: ['test', 'copyHtml', 'copyJs', 'compileCss'])
+task build(type: Copy, dependsOn: ['copyHtml', 'copyJs', 'compileCss'])
 
 task clean(type: Delete) {
     delete project.buildDir

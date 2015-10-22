@@ -1,7 +1,11 @@
 @import 'pure/pure';
 @import 'pure/grids-responsive';
 
-.myClass {
-  @extend .pure-g;
-  hidden: true;
+form[name=query-form] {
+  @extend .pure-form;
+  @extend .pure-form-aligned;
+}
+
+.input-with-label {
+  @extend .pure-control-group;
 }
