@@ -1,0 +1,11 @@
+.nav-menu {
+  @extend .pure-menu-list;
+  
+  &__item {
+    @extend .pure-menu-item;
+  }
+  
+  &__item-link {
+    @extend .pure-menu-link;
+  }
+}

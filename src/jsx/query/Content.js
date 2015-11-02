@@ -20,7 +20,7 @@ module.exports = React.createClass({
   },
   submitQuery(event) {
     event.preventDefault();
-    $.get(this.props.url + '/' + this.state.query.from + '/to/' + this.state.query.till, function(data) {
+    $.get('/api/expenses/' + this.state.query.from + '/to/' + this.state.query.till, function(data) {
       this.setState({results: data});
     }.bind(this));
   },

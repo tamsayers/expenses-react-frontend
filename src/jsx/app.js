@@ -1,10 +1,14 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
-//var ExpensesForm = require('./add/ExpensesForm.js');
 var QueryContent = require('./query/Content.js');
+var NavMenu = require('./navigation/Menu.js');
 
 ReactDOM.render(
-//  <ExpensesForm url='/api/expenses' />,
-  <QueryContent url='/api/expenses' />,
+  <QueryContent />,
   document.getElementById('content')
+);
+
+ReactDOM.render(
+  <NavMenu />,
+  document.getElementById('header-menu')
 );

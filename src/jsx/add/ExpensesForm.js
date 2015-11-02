@@ -38,13 +38,13 @@ module.exports = React.createClass({
   },
   _addedOk() {
     ReactDOM.render(
-      <QueryContent url='/api/expenses' />,
+      <QueryContent />,
       document.getElementById('content')
     );
   },
   submitExpenses(event) {
     $.ajax({
-      url: this.props.url,
+      url: '/api/expenses',
       method: 'POST',
       data: JSON.stringify(this.state.expenses),
       contentType: 'application/json',
