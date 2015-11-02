@@ -1,0 +1,7 @@
+.button {
+  @extend .pure-button;
+  
+  &[type=submit] {
+    @extend .pure-button-primary;
+  }
+}

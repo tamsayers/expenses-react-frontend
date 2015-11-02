@@ -1,26 +1,25 @@
 {
-  "name": "expenses-frontend",
-  "description": "React version of expenses frontend",
-  "version": "0.1.0",
-  "devDependencies": {
-    "react": "latest",
-    "react-addons-test-utils": "latest",
-    "react-dom": "latest",
-    "jquery": "latest",
-    "babel": "latest",
-    "react": "latest",
-    "babel-jest": "latest",
-    "jest-cli": "latest",
-    "browserify": "latest",
-    "node-sass": "3.3.2",
-    "bower-installer": "latest"
+  "name":"expenses-frontend",
+  "description":"React version of expenses frontend",
+  "version":"0.1.0",
+  "devDependencies":{
+    "react":"latest",
+    "react-addons-test-utils":"latest",
+    "react-dom":"latest",
+    "jquery":"latest",
+    "babel":"^5.8.0",
+    "babel-jest":"latest",
+    "jest-cli":"latest",
+    "browserify":"latest",
+    "node-sass":"3.3.2",
+    "bower-installer":"latest"
   },
-  "scripts": {
-    "test": "jest"
+  "scripts":{
+    "test":"jest"
   },
-  "jest": {
-    "scriptPreprocessor": "<rootDir>/node_modules/babel-jest",
-    "unmockedModulePathPatterns": [
+  "jest":{
+    "scriptPreprocessor":"<rootDir>/node_modules/babel-jest",
+    "unmockedModulePathPatterns":[
       "<rootDir>/node_modules/react",
       "<rootDir>/node_modules/react-dom",
       "<rootDir>/node_modules/react-addons-test-utils",

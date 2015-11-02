@@ -1,6 +1,8 @@
 var React = require('react');
+var ReactDOM = require('react');
 var $ = require('jquery');
 var AddExpense = require("./ExpenseInput.js");
+var QueryContent = require('../query/Content.js');
 
 module.exports = React.createClass({
   getInitialState() {
@@ -13,17 +15,32 @@ module.exports = React.createClass({
     });
   },
   updateExpense(i, event) {
+    var value = function() {
+      if (event.target.type == 'number') {
+        return event.target.valueAsNumber;
+      } else {
+        return event.target.value;
+      }
+    };
+
     var setVal = function(obj, props) {
       if (props.length > 1) {
         setVal(obj[props.shift()], props);
       } else {
-        obj[props[0]] = event.target.value;
+        obj[props[0]] = value();
       }
     };
+
     this.setState(function(previousState, currentProps) {
       setVal(previousState.expenses[i], event.target.name.split('.'));
       return {expenses: previousState.expenses};
     });
+  },
+  _addedOk() {
+    ReactDOM.render(
+      <QueryContent url='/api/expenses' />,
+      document.getElementById('content')
+    );
   },
   submitExpenses(event) {
     $.ajax({
@@ -31,7 +48,8 @@ module.exports = React.createClass({
       method: 'POST',
       data: JSON.stringify(this.state.expenses),
       contentType: 'application/json',
-      dataType: 'json'});
+      dataType: 'json'})
+    .done(this._addedOk);
 
     event.preventDefault();
   },

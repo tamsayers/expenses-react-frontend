@@ -3,8 +3,8 @@ var React = require('react');
 module.exports = React.createClass({
   render() {
     var headerClass = this.props.className + '-header';
-    if (this.props.key == 0) {
-      headerClass += headerClass + '--first';
+    if (this.props.rowIndex == 0) {
+      headerClass += ' ' + headerClass + '--first';
     }
     return (
       <li className={this.props.className}>
@@ -20,7 +20,7 @@ module.exports = React.createClass({
           <div className='data-item'>{this.props.data.description}</div>
           <div className='data-item'>{this.props.data.clientName}</div>
           <div className='data-item'>{this.props.data.supplier}</div>
-          <div className='data-item'>{this.props.data.cost.value}:{this.props.data.cost.type}</div>
+          <div className='data-item'>{this.props.data.cost.amount}: {this.props.data.cost.costType}</div>
         </div>
       </li>
     );

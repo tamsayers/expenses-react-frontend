@@ -1,0 +1,23 @@
+.results-table {
+  @extend .pure-g;
+  
+  &__result {
+    width: 100%;
+    
+    &-header {
+      &--first {
+        display: block;
+        border-bottom-color: black;
+        border-bottom-style: solid;
+        border-bottom-width: thin;
+        margin-bottom: 5px;
+      }
+
+      display: none;
+    }
+    
+    .header-item, .data-item {
+      @extend .pure-u-1-5;
+    }
+  }
+}

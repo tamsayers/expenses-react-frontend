@@ -2,7 +2,7 @@ var React = require('react');
 
 var Input = React.createClass({
   render() {
-    var { type, name, children, value, onChange, other } = this.props;
+    var { type, name, children, value, onChange, ...other } = this.props;
     return (
       <div className='input-with-label'>
         <label htmlFor={name}>{children}</label>

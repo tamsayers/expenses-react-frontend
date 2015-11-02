@@ -15,7 +15,7 @@ module.exports = React.createClass({
         <Inputs.Text name='clientName' value={expense.clientName} onChange={onChange}>Client Name</Inputs.Text>
         <Inputs.Text name='supplier' value={expense.supplier} onChange={onChange}>Supplier</Inputs.Text>
         <Inputs.Number name='cost.amount' value={expense.cost.amount} onChange={onChange} step='0.01'>Cost</Inputs.Number>
-        <SelectOptions name='cost.type' value={expense.cost.type} options={options} onChange={onChange}/>
+        <SelectOptions name='cost.costType' value={expense.cost.type} options={options} onChange={onChange}/>
       </fieldset>
     );
   }

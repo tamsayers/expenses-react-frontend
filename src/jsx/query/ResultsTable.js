@@ -6,7 +6,7 @@ module.exports = React.createClass({
     return (
       <ul className='results-table'>
         {this.props.data.map(function(result, i) {
-          return <Result data={result} key={i} className='results-table__result' />
+          return <Result data={result} key={i} rowIndex={i} className='results-table__result' />
         })}
       </ul>
     );
