@@ -1,6 +1,8 @@
 .button {
   @extend .pure-button;
 
+  margin-left: $default-spacing;
+
   &--submit {
     @extend .pure-button-primary;
   }

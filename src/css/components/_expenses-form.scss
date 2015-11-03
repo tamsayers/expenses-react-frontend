@@ -5,4 +5,8 @@
   fieldset { 
     padding: 0;
   }
+
+  select {
+    height: $form-item-height;
+  }
 }

@@ -4,7 +4,7 @@
   
   fieldset {
     display: table;
-    
+    padding: 0;
   }
     
   .input-with-label {
@@ -14,6 +14,6 @@
   &__submit {
     display: table-cell;
     vertical-align: bottom;
-    padding-bottom: 5px;
+    padding-bottom: $default-spacing;
   }
 }

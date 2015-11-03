@@ -15,12 +15,17 @@ var Input = React.createClass({
 module.exports = {
   Number: React.createClass({
     render() {
-      return <Input type="number" {...this.props}/>
+      return <Input type='number' {...this.props}/>
+    }
+  }),
+  Date: React.createClass({
+    render() {
+      return <Input type='date' {...this.props}/>
     }
   }),
   Text: React.createClass({
     render() {
-      return <Input type="text" {...this.props}/>
+      return <Input type='text' {...this.props}/>
     }
   })
 };

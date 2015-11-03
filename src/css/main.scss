@@ -4,13 +4,14 @@
 @import 'resets';
 
 @import 'modules/colours';
+@import 'modules/sizes';
 
 @import 'components/button';
 @import 'components/expenses-form';
-@import 'components/footer';
 @import 'components/header';
 @import 'components/header-item';
 @import 'components/input-expense';
+@import 'components/input-with-label';
 @import 'components/nav-menu';
 @import 'components/query-form';
 @import 'components/results-table';

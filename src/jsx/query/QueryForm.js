@@ -7,8 +7,9 @@ module.exports = React.createClass({
     return (
       <form name='query-form' className='query-form' onSubmit={this.props.onSubmit}>
         <fieldset>
-          <Input.Text name="from" value={this.props.query.from} onChange={this.props.onChange}>Date From</Input.Text>
-          <Input.Text name="till" value={this.props.query.till} onChange={this.props.onChange}>Date Till</Input.Text>
+          <Input.Date name="from" value={this.props.query.from} onChange={this.props.onChange}>Date From</Input.Date>
+          <Input.Date name="till" value={this.props.query.till} onChange={this.props.onChange}>Date Till</Input.Date>
+          <Input.Text name="supplier" value={this.props.query.supplier} onChange={this.props.onChange} placeholder='Optional supplier'>Supplier</Input.Text>
           <div className="query-form__submit">
             <Button.Submit />
           </div>
