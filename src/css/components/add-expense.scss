@@ -1,0 +1,19 @@
+.add-expense {
+  .input-with-label {
+    float:left;
+    padding-left: 5px;
+  }
+  
+  label {
+    display: none;
+  }
+  
+  &--first {
+    label {
+      display: block;
+    }
+    select[name='cost.costType'] {
+      margin-top: 1.65em;
+    }
+  }
+}

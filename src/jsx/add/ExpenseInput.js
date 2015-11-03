@@ -4,18 +4,20 @@ var SelectOptions = require('../form/SelectOptions.js');
 
 module.exports = React.createClass({
   render() {
-    var expense = this.props.data;
-    var onChange = this.props.onChange;
     var options = [{value:'Simple'},{value:'Mileage2'},{value:'Vatable'}];
+    var className = 'add-expense';
+    if (this.props.rowIndex == 0) {
+      className += ' ' + className + '--first';
+    }
 
     return (
-      <fieldset className='expense'>
-        <Inputs.Text name='date' value={expense.date} onChange={onChange}>Date</Inputs.Text>
-        <Inputs.Text name='description' value={expense.description} onChange={onChange}>Description</Inputs.Text>
-        <Inputs.Text name='clientName' value={expense.clientName} onChange={onChange}>Client Name</Inputs.Text>
-        <Inputs.Text name='supplier' value={expense.supplier} onChange={onChange}>Supplier</Inputs.Text>
-        <Inputs.Number name='cost.amount' value={expense.cost.amount} onChange={onChange} step='0.01'>Cost</Inputs.Number>
-        <SelectOptions name='cost.costType' value={expense.cost.type} options={options} onChange={onChange}/>
+      <fieldset className={className}>
+        <Inputs.Text name='date' value={this.props.data.date} onChange={this.props.onChange}>Date</Inputs.Text>
+        <Inputs.Text name='description' value={this.props.data.description} onChange={this.props.onChange}>Description</Inputs.Text>
+        <Inputs.Text name='clientName' value={this.props.data.clientName} onChange={this.props.onChange}>Client Name</Inputs.Text>
+        <Inputs.Text name='supplier' value={this.props.data.supplier} onChange={this.props.onChange}>Supplier</Inputs.Text>
+        <Inputs.Number name='cost.amount' value={this.props.data.cost.amount} onChange={this.props.onChange} step='0.01' min='0'>Cost</Inputs.Number>
+        <SelectOptions name='cost.costType' value={this.props.data.cost.type} options={options} onChange={this.props.onChange}/>
       </fieldset>
     );
   }

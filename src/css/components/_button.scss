@@ -1,7 +1,7 @@
 .button {
   @extend .pure-button;
   
-  &[type=submit] {
+  &--submit {
     @extend .pure-button-primary;
   }
 }
