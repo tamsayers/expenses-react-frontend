@@ -10,5 +10,5 @@ ReactDOM.render(
 
 ReactDOM.render(
   <NavMenu />,
-  document.getElementById('header-menu')
+  document.getElementById('header__menu')
 );

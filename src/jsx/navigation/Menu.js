@@ -23,6 +23,8 @@ module.exports = React.createClass({
       <ul className="nav-menu">
         <li className="nav-menu__item">
           <PageLink onClick={this._updateContent(ExpensesForm)}>Add Expenses</PageLink>
+        </li>
+        <li className="nav-menu__item">
           <PageLink onClick={this._updateContent(QueryContent)}>Search</PageLink>
         </li>
       </ul>
