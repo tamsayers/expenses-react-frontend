@@ -20,7 +20,7 @@ module.exports = React.createClass({
           <div className='data-item'>{this.props.data.description}</div>
           <div className='data-item'>{this.props.data.clientName}</div>
           <div className='data-item'>{this.props.data.supplier}</div>
-          <div className='data-item'>{this.props.data.cost.amount}: {this.props.data.cost.costType}</div>
+          <div className='data-item'>£{this.props.data.cost.amount.toFixed(2)} ({this.props.data.cost.costType})</div>
         </div>
       </li>
     );
