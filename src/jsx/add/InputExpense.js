@@ -1,11 +1,12 @@
 var React = require('react');
 var Inputs = require('../form/InputsWithLabel.js');
 var SelectOptions = require('../form/SelectOptions.js');
+var Button = require('../utils/Button.js');
 
 module.exports = React.createClass({
   render() {
     var options = [{value:'Simple'},{value:'Mileage2'},{value:'Vatable'}];
-    var className = 'add-expense';
+    var className = 'input-expense';
     if (this.props.rowIndex == 0) {
       className += ' ' + className + '--first';
     }
@@ -18,6 +19,7 @@ module.exports = React.createClass({
         <Inputs.Text name='supplier' value={this.props.data.supplier} onChange={this.props.onChange}>Supplier</Inputs.Text>
         <Inputs.Number name='cost.amount' value={this.props.data.cost.amount} onChange={this.props.onChange} step='0.01' min='0'>Cost</Inputs.Number>
         <SelectOptions name='cost.costType' value={this.props.data.cost.type} options={options} onChange={this.props.onChange}/>
+        <Button.Delete onClick={this.props.onDelete} />
       </fieldset>
     );
   }

@@ -1,7 +1,7 @@
 var React = require('react');
 var ReactDOM = require('react');
 var $ = require('jquery');
-var AddExpense = require("./ExpenseInput.js");
+var InputExpense = require("./InputExpense.js");
 var QueryContent = require('../query/Content.js');
 var Button = require('../utils/Button.js');
 
@@ -13,6 +13,11 @@ module.exports = React.createClass({
     this.setState(function(previousState, currentProps) {
       previousState.expenses.push({cost: {}});
       return {expenses: previousState.expenses};
+    });
+  },
+  _removeExpense(index) {
+    this.setState(function(previousState, currentProps) {
+      return {expenses: previousState.expenses.filter((el, i) => i !== index)};
     });
   },
   _updateExpense(i, event) {
@@ -56,10 +61,11 @@ module.exports = React.createClass({
   },
   render() {
     var onChangeForExpense = i => this._updateExpense.bind(this, i);
+    var onDeleteForExpense = i => this._removeExpense.bind(this, i);
     return (
       <form name="expenses-form" className="expenses-form" onSubmit={this._submitExpenses}>
         {this.state.expenses.map(function(expense, i) {
-          return <AddExpense key={i} rowIndex={i} data={expense} onChange={onChangeForExpense(i)}/>;
+          return <InputExpense key={i} rowIndex={i} data={expense} onChange={onChangeForExpense(i)} onDelete={onDeleteForExpense(i)}/>;
         })}
         <Button.Click onClick={this._newExpense} >Add</Button.Click>
         <Button.Submit />

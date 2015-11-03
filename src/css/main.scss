@@ -2,13 +2,15 @@
 @import 'pure/grids-responsive';
 
 @import 'resets';
+
 @import 'modules/colours';
-@import 'components/header';
+
+@import 'components/button';
+@import 'components/expenses-form';
 @import 'components/footer';
+@import 'components/header';
+@import 'components/header-item';
+@import 'components/input-expense';
 @import 'components/nav-menu';
 @import 'components/query-form';
 @import 'components/results-table';
-@import 'components/header-item';
-@import 'components/add-expense';
-@import 'components/expenses-form';
-@import 'components/button';

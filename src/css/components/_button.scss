@@ -1,7 +1,11 @@
 .button {
   @extend .pure-button;
-  
+
   &--submit {
     @extend .pure-button-primary;
+  }
+
+  &--delete {
+    background-color: $red;
   }
 }

@@ -16,7 +16,16 @@ var Click = React.createClass({
   }
 });
 
+var Delete = React.createClass({
+  render() {
+    return (
+      <button className="button button--delete" type="button" onClick={this.props.onClick}>X</button>
+    );
+  }
+});
+
 module.exports = {
   Submit: Submit,
+  Delete: Delete,
   Click: Click
 }

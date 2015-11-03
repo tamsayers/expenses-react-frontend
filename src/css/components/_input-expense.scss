@@ -1,5 +1,5 @@
-.add-expense {
-  .input-with-label {
+.input-expense {
+  .input-with-label, select {
     float:left;
     padding-left: 5px;
   }
@@ -7,13 +7,23 @@
   label {
     display: none;
   }
-  
+
+  .button {
+    margin-left: 1em;
+    margin-top: 0.3em;
+  }
+
   &--first {
     label {
       display: block;
     }
+
     select[name='cost.costType'] {
       margin-top: 1.65em;
+    }
+
+    .button {
+      margin-top: 1.7em;
     }
   }
 }
