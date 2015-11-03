@@ -1,6 +1,8 @@
 .results-table {
   @extend .pure-g;
   
+  padding: $default-spacing;
+
   &__result {
     width: 100%;
     
