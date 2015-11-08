@@ -1,0 +1,12 @@
+.expenses-form {
+  @extend .pure-form;
+  @extend .pure-form-stacked;
+  
+  fieldset { 
+    padding: 0;
+  }
+
+  select {
+    height: $form-item-height;
+  }
+}

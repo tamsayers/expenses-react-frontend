@@ -1,49 +1,74 @@
 var React = require('react');
+var ReactDOM = require('react');
 var $ = require('jquery');
-var AddExpense = require("./ExpenseInput.js");
+var InputExpense = require("./InputExpense.js");
+var QueryContent = require('../query/Content.js');
+var Button = require('../utils/Button.js');
 
 module.exports = React.createClass({
   getInitialState() {
     return { expenses: [{cost: {}}] };
   },
-  newExpense() {
+  _newExpense() {
     this.setState(function(previousState, currentProps) {
       previousState.expenses.push({cost: {}});
       return {expenses: previousState.expenses};
     });
   },
-  updateExpense(i, event) {
+  _removeExpense(index) {
+    this.setState(function(previousState, currentProps) {
+      return {expenses: previousState.expenses.filter((el, i) => i !== index)};
+    });
+  },
+  _updateExpense(i, event) {
+    var value = function() {
+      if (event.target.type == 'number') {
+        return event.target.valueAsNumber;
+      } else {
+        return event.target.value;
+      }
+    };
+
     var setVal = function(obj, props) {
       if (props.length > 1) {
         setVal(obj[props.shift()], props);
       } else {
-        obj[props[0]] = event.target.value;
+        obj[props[0]] = value();
       }
     };
+
     this.setState(function(previousState, currentProps) {
       setVal(previousState.expenses[i], event.target.name.split('.'));
       return {expenses: previousState.expenses};
     });
   },
-  submitExpenses(event) {
+  _addedOk() {
+    ReactDOM.render(
+      <QueryContent />,
+      document.getElementById('content')
+    );
+  },
+  _submitExpenses(event) {
     $.ajax({
-      url: this.props.url,
+      url: '/api/expenses',
       method: 'POST',
       data: JSON.stringify(this.state.expenses),
       contentType: 'application/json',
-      dataType: 'json'});
+      dataType: 'json'})
+    .done(this._addedOk);
 
     event.preventDefault();
   },
   render() {
-    var onChangeForExpense = i => this.updateExpense.bind(this, i);
+    var onChangeForExpense = i => this._updateExpense.bind(this, i);
+    var onDeleteForExpense = i => this._removeExpense.bind(this, i);
     return (
-      <form name="expenses-form" onSubmit={this.submitExpenses}>
+      <form name="expenses-form" className="expenses-form" onSubmit={this._submitExpenses}>
         {this.state.expenses.map(function(expense, i) {
-          return <AddExpense key={i} data={expense} onChange={onChangeForExpense(i)}/>
+          return <InputExpense key={i} rowIndex={i} data={expense} onChange={onChangeForExpense(i)} onDelete={onDeleteForExpense(i)}/>;
         })}
-        <button className="expenses-form__add-expense" type="button" onClick={this.newExpense} >Add</button>
-        <button className="expenses-form__submit" type="submit">Submit</button>
+        <Button.Click onClick={this._newExpense} >Add</Button.Click>
+        <Button.Submit />
       </form>
     );
 	}

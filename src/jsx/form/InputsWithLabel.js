@@ -2,7 +2,7 @@ var React = require('react');
 
 var Input = React.createClass({
   render() {
-    var { type, name, children, value, onChange, other } = this.props;
+    var { type, name, children, value, onChange, ...other } = this.props;
     return (
       <div className='input-with-label'>
         <label htmlFor={name}>{children}</label>
@@ -15,12 +15,17 @@ var Input = React.createClass({
 module.exports = {
   Number: React.createClass({
     render() {
-      return <Input type="number" {...this.props}/>
+      return <Input type='number' {...this.props}/>
+    }
+  }),
+  Date: React.createClass({
+    render() {
+      return <Input type='date' {...this.props}/>
     }
   }),
   Text: React.createClass({
     render() {
-      return <Input type="text" {...this.props}/>
+      return <Input type='text' {...this.props}/>
     }
   })
 };

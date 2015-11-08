@@ -1,0 +1,19 @@
+.query-form {
+  @extend .pure-form;
+  @extend .pure-form-stacked;
+  
+  fieldset {
+    display: table;
+    padding: 0;
+  }
+    
+  .input-with-label {
+    display: table-cell;
+  }
+
+  &__submit {
+    display: table-cell;
+    vertical-align: bottom;
+    padding-bottom: $default-spacing;
+  }
+}

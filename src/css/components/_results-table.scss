@@ -1,0 +1,25 @@
+.results-table {
+  @extend .pure-g;
+  
+  padding: $default-spacing;
+
+  &__result {
+    width: 100%;
+    
+    &-header {
+      &--first {
+        display: block;
+        border-bottom-color: black;
+        border-bottom-style: solid;
+        border-bottom-width: thin;
+        margin-bottom: $default-spacing;
+      }
+
+      display: none;
+    }
+    
+    .header-item, .data-item {
+      @extend .pure-u-1-8;
+    }
+  }
+}

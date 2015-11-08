@@ -1,0 +1,29 @@
+.input-expense {
+  .input-with-label, select {
+    float:left;
+  }
+  
+  label {
+    display: none;
+  }
+
+  .button {
+    font-size: 50%;
+    margin-left: 1em;
+    margin-top: 1.3em;
+  }
+
+  &--first {
+    label {
+      display: block;
+    }
+
+    select[name='cost.costType'] {
+      margin-top: 1.65em;
+    }
+
+    .button {
+      margin-top: 3.8em;
+    }
+  }
+}

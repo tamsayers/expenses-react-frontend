@@ -1,11 +1,17 @@
 @import 'pure/pure';
 @import 'pure/grids-responsive';
 
-form[name=query-form] {
-  @extend .pure-form;
-  @extend .pure-form-aligned;
-}
+@import 'resets';
 
-.input-with-label {
-  @extend .pure-control-group;
-}
+@import 'modules/colours';
+@import 'modules/sizes';
+
+@import 'components/button';
+@import 'components/expenses-form';
+@import 'components/header';
+@import 'components/header-item';
+@import 'components/input-expense';
+@import 'components/input-with-label';
+@import 'components/nav-menu';
+@import 'components/query-form';
+@import 'components/results-table';

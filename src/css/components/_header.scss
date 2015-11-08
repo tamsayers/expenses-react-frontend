@@ -1,0 +1,9 @@
+#header {
+  background-color: $page-background-colour;
+  color: white;
+
+  &__menu {
+    @extend .pure-menu;
+    @extend .pure-menu-horizontal;
+  }
+}
