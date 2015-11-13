@@ -24,7 +24,7 @@ module.exports = React.createClass({
     if (this.state.query.supplier) {
       params.supplier = this.state.query.supplier;
     }
-    $.get('/api/expenses/' + this.state.query.from + '/to/' + this.state.query.till, params, function(data) {
+    $.getJSON('/api/expenses/' + this.state.query.from + '/to/' + this.state.query.till, params, function(data) {
       this.setState({results: data});
     }.bind(this));
   },
