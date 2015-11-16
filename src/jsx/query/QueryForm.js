@@ -11,7 +11,10 @@ module.exports = React.createClass({
           <Input.Date name="till" value={this.props.query.till} onChange={this.props.onChange}>Date Till</Input.Date>
           <Input.Text name="supplier" value={this.props.query.supplier} onChange={this.props.onChange} placeholder='Optional supplier'>Supplier</Input.Text>
           <div className="query-form__submit">
-            <Button.Submit />
+            <Button.Submit>View</Button.Submit>
+          </div>
+          <div className="query-form__download-csv">
+            <Button.Click onClick={this.props.downloadCsv}>Download CSV</Button.Click>
           </div>
         </fieldset>
       </form>

@@ -2,8 +2,14 @@ var React = require('react');
 
 var Submit = React.createClass({
   render() {
+    var buttonContent;
+    if (this.props.children) {
+      buttonContent = this.props.children;
+    } else {
+      buttonContent = 'Submit';
+    }
     return (
-      <button className="button button--submit" type="submit">Submit</button>
+      <button className="button button--submit" type="submit">{buttonContent}</button>
     );
   }
 });
@@ -11,7 +17,7 @@ var Submit = React.createClass({
 var Click = React.createClass({
   render() {
     return (
-      <button className="button" type="button" onClick={this.props.onClick}>{this.props.children}</button>
+      <a href="#" className="button" type="button" onClick={this.props.onClick}>{this.props.children}</a>
     );
   }
 });

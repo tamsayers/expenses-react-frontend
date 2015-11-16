@@ -18,20 +18,33 @@ module.exports = React.createClass({
       return {query: previousState.query};
     });
   },
-  submitQuery(event) {
+  _updateResults(data) {
+    this.setState({results: data});
+  },
+  _queryParams() {
     event.preventDefault();
     var params = {};
     if (this.state.query.supplier) {
       params.supplier = this.state.query.supplier;
     }
-    $.getJSON('/api/expenses/' + this.state.query.from + '/to/' + this.state.query.till, params, function(data) {
-      this.setState({results: data});
-    }.bind(this));
+
+    return params;
+  },
+  _submitQuery(event) {
+    $.getJSON('/api/expenses/' + this.state.query.from + '/to/' + this.state.query.till, this._queryParams(), this._updateResults);
+    event.preventDefault();
+  },
+  _downloadCsv(event) {
+    var url = '/api/expenses/' + this.state.query.from + '/to/' + this.state.query.till;
+    var queryParams = this._queryParams();
+    queryParams.contentType = 'csv';
+
+    event.target.href = url + '?' + $.param(queryParams);
   },
   render() {
     return (
       <div>
-        <QueryForm query={this.state.query} onChange={this.queryChange} onSubmit={this.submitQuery}/>
+        <QueryForm query={this.state.query} onChange={this.queryChange} onSubmit={this._submitQuery} downloadCsv={this._downloadCsv}/>
         <ResultsTable data={this.state.results} />
       </div>
     );

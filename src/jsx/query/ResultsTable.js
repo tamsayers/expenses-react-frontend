@@ -1,5 +1,6 @@
 var React = require('react');
 var Result = require('./Result.js');
+var Button = require('../utils/Button.js');
 
 module.exports = React.createClass({
   render() {
