@@ -11,7 +11,7 @@
     display: table-cell;
   }
 
-  &__submit {
+  &__submit, &__download-csv {
     display: table-cell;
     vertical-align: bottom;
     padding-bottom: $default-spacing;
