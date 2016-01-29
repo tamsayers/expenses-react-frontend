@@ -12,20 +12,14 @@ var PageLink = React.createClass({
 });
 
 module.exports = React.createClass({
-  _updateContent(Component) { return e => 
-    ReactDOM.render(
-      <Component />,
-      document.getElementById('content')
-    );
-  },
   render() {
     return (
       <ul className="nav-menu">
         <li className="nav-menu__item">
-          <PageLink onClick={this._updateContent(ExpensesForm)}>Add Expenses</PageLink>
+          <PageLink onClick={this.props.updateContent(ExpensesForm)}>Add Expenses</PageLink>
         </li>
         <li className="nav-menu__item">
-          <PageLink onClick={this._updateContent(QueryContent)}>Search</PageLink>
+          <PageLink onClick={this.props.updateContent(QueryContent)}>Search</PageLink>
         </li>
       </ul>
     );
