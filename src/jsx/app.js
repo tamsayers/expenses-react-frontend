@@ -1,6 +1,6 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
-var MainView = require('./view/Main.js');
+var MainView = require('./components/view/Main.js');
 
 ReactDOM.render(
   <MainView />,
