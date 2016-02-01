@@ -1,6 +1,6 @@
-var React = require('react');
+const React = require('react');
 
-var Input = React.createClass({
+const Input = React.createClass({
   render() {
     var { type, name, children, value, onChange, ...other } = this.props;
     return (

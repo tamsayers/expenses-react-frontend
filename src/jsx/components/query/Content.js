@@ -1,22 +1,16 @@
-var React = require('react');
-var QueryForm = require('./QueryForm.js');
-var ResultsTable = require('./ResultsTable.js');
-var $ = require('jquery');
+const React = require('react'),
+    QueryForm = require('./QueryForm.js'),
+    ResultsTable = require('./ResultsTable.js'),
+    InputStateMixin = require('../../mixins/InputStateMixin'),
+    $ = require('jquery');
 
 module.exports = React.createClass({
+  mixins: [InputStateMixin],
   getInitialState() {
-    return { 
+    return {
       query: {},
       results: []
     };
-  },
-  queryChange(event) {
-    // some weird React event pooling stuff requires copy of values to new object.
-    var e = $.extend({}, event);
-    this.setState(function(previousState, currentProps) {
-      previousState.query[e.target.name] = e.target.value;
-      return {query: previousState.query};
-    });
   },
   _updateResults(data) {
     this.setState({results: data});
@@ -44,7 +38,7 @@ module.exports = React.createClass({
   render() {
     return (
       <div>
-        <QueryForm query={this.state.query} onChange={this.queryChange} onSubmit={this._submitQuery} downloadCsv={this._downloadCsv}/>
+        <QueryForm query={this.state.query} onChange={this.inputValueChange} onSubmit={this._submitQuery} downloadCsv={this._downloadCsv}/>
         <ResultsTable data={this.state.results} />
       </div>
     );

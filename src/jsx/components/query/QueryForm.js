@@ -1,6 +1,6 @@
-var React = require('react');
-var Input = require('../form/InputsWithLabel.js');
-var Button = require('../utils/Button.js');
+var React = require('react'),
+    Input = require('../form/InputsWithLabel.js'),
+    Button = require('../utils/Button.js');
 
 module.exports = React.createClass({
   render() {
