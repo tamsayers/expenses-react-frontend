@@ -9,19 +9,17 @@ describe('ExpensesForm', function() {
 
   beforeEach(function() {
     spyOn($, 'ajax');
-    
+
     var ExpensesForm = require('../../build/lib/add/ExpensesForm.js');
     component = TestUtils.renderIntoDocument(
       <ExpensesForm url='/expenses/endpoint' />
     );
-    
+
     node = ReactDOM.findDOMNode(TestUtils.findRenderedDOMComponentWithTag(component, 'form'));
   });
 
   it('should post the expenses to the given url', function() {
     component.state.expenses[0].newValue = 'to submit';
-    console.log(component.refs);
-    console.log(component.refs._form);
     TestUtils.Simulate.submit(node);
 
     expect($.ajax).toHaveBeenCalledWith({
