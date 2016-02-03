@@ -3,26 +3,27 @@
   "description": "React version of expenses frontend",
   "version": "0.1.0",
   "devDependencies": {
-    "react": "latest",
-    "react-addons-test-utils": "latest",
-    "react-dom": "latest",
-    "jquery": "latest",
     "babel-cli": "latest",
     "babel-jest": "latest",
-    "babel-preset-react": "latest",
     "babel-preset-es2015": "latest",
+    "babel-preset-react": "latest",
     "babel-preset-stage-2": "latest",
-    "jest-cli": "latest",
+    "bower-installer": "latest",
     "browserify": "latest",
+    "flux": "^2.1.1",
+    "jest-cli": "latest",
+    "jquery": "latest",
     "node-sass": "3.3.2",
     "q": "^1.4.1",
-    "bower-installer": "latest"
+    "react": "latest",
+    "react-addons-test-utils": "latest",
+    "react-dom": "latest"
   },
   "scripts": {
     "test": "jest"
   },
   "jest": {
-    "testRunner":"<rootDir>/node_modules/jest-cli/src/testRunners/jasmine/jasmine2.js",
+    "testRunner": "<rootDir>/node_modules/jest-cli/src/testRunners/jasmine/jasmine2.js",
     "scriptPreprocessor": "<rootDir>/node_modules/babel-jest",
     "unmockedModulePathPatterns": [
       "<rootDir>/node_modules/react",
