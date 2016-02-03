@@ -2,6 +2,7 @@ const React = require('react'),
     QueryForm = require('./QueryForm.js'),
     ResultsTable = require('./ResultsTable.js'),
     InputStateMixin = require('../../mixins/InputStateMixin'),
+    RequestJson = require('../../services/RequestJson'),
     $ = require('jquery');
 
 module.exports = React.createClass({
@@ -16,7 +17,6 @@ module.exports = React.createClass({
     this.setState({results: data});
   },
   _queryParams() {
-    event.preventDefault();
     var params = {};
     if (this.state.query.supplier) {
       params.supplier = this.state.query.supplier;
@@ -25,8 +25,9 @@ module.exports = React.createClass({
     return params;
   },
   _submitQuery(event) {
-    $.getJSON('/api/expenses/' + this.state.query.from + '/to/' + this.state.query.till, this._queryParams(), this._updateResults);
     event.preventDefault();
+    RequestJson.get('/api/expenses/' + this.state.query.from + '/to/' + this.state.query.till, this._queryParams())
+               .then(this._updateResults);
   },
   _downloadCsv(event) {
     var url = '/api/expenses/' + this.state.query.from + '/to/' + this.state.query.till;

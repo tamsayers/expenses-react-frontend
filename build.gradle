@@ -18,7 +18,7 @@ task compileJsx(type: NodeTask, dependsOn: 'npmInstall') {
     inputs.dir jsxDir
     outputs.dir libDir
 
-    script = file('node_modules/babel/bin/babel')
+    script = file('node_modules/babel-core')
     args = [jsxDir, '--out-dir', libDir]
 }
 
@@ -33,7 +33,7 @@ task bundleJs(type: NodeTask, dependsOn: 'compileJsx') {
     outputs.file jsBundleFile
 
     script = file('node_modules/browserify/bin/cmd')
-    args = ['-r', 'react', "$libDir/app.js", '-o', jsBundleFile]
+    args = ["$libDir/app.js", '-o', jsBundleFile]
 }
 
 task bowerInstall(type: NodeTask, dependsOn: 'npmInstall') {

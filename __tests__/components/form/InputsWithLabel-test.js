@@ -1,17 +1,18 @@
-jest.dontMock('../../build/lib/form/InputsWithLabel.js');
+jest.dontMock('../../../build/lib/components/form/InputsWithLabel.js');
+
+const InputsWithLabel = require('../../../build/lib/components/form/InputsWithLabel.js'),
+    $ = require('jquery'),
+    TestUtils = require('react-addons-test-utils'),
+    React = require('react'),
+    ReactDOM = require('react-dom');
 
 describe('InputsWithLabel', function() {
-  var $ = require('jquery');
   var inputTypes = ['text', 'number'];
   var component, nodes, handleUpdate;
-  var TestUtils = require('react-addons-test-utils');
-  var React = require('react');
-  var ReactDOM = require('react-dom');
 
   beforeEach(function() {
     handleUpdate = jest.genMockFunction();
-    var InputsWithLabel = require('../../build/lib/form/InputsWithLabel.js');
-    
+
     var textComponent = TestUtils.renderIntoDocument(
       <InputsWithLabel.Text block='text' name='inputName' value='val' onChange={handleUpdate}>text label</InputsWithLabel.Text>
     );
@@ -23,12 +24,6 @@ describe('InputsWithLabel', function() {
       'text': ReactDOM.findDOMNode(textComponent),
       'number': ReactDOM.findDOMNode(numberComponent)
     };
-  });
-
-  $.each(inputTypes, function(i, type) {
-    it('renders a ' + type + ' component with the correctly generated class', function() {
-      expect($(nodes[type]).attr('class')).toEqual(type + '__input-name');
-    });
   });
 
   $.each(inputTypes, function(i, type) {
@@ -66,7 +61,7 @@ describe('InputsWithLabel', function() {
       var input = nodes[type].querySelector('input');
       input.value = 'changed val';
       TestUtils.Simulate.change(input);
-  
+
       expect(handleUpdate).toBeCalled();
     });
   });
