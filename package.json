@@ -7,9 +7,11 @@
     "react-addons-test-utils": "latest",
     "react-dom": "latest",
     "jquery": "latest",
-    "babel-core": "latest",
+    "babel-cli": "latest",
     "babel-jest": "latest",
     "babel-preset-react": "latest",
+    "babel-preset-es2015": "latest",
+    "babel-preset-stage-2": "latest",
     "jest-cli": "latest",
     "browserify": "latest",
     "node-sass": "3.3.2",
@@ -31,7 +33,9 @@
   },
   "babel": {
     "presets": [
-      "react"
+      "react",
+      "es2015",
+      "stage-2"
     ]
   }
 }

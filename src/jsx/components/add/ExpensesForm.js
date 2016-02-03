@@ -1,9 +1,9 @@
-var React = require('react');
-var ReactDOM = require('react');
-var $ = require('jquery');
-var InputExpense = require("./InputExpense.js");
-var QueryContent = require('../query/Content.js');
-var Button = require('../utils/Button.js');
+var React = require('react'),
+    ReactDOM = require('react'),
+    RequestJson = require('../../services/RequestJson'),
+    InputExpense = require('./InputExpense.js'),
+    QueryContent = require('../query/Content.js'),
+    Button = require('../utils/Button.js');
 
 module.exports = React.createClass({
   getInitialState() {
@@ -49,15 +49,10 @@ module.exports = React.createClass({
     );
   },
   _submitExpenses(event) {
-    $.ajax({
-      url: '/api/expenses',
-      method: 'POST',
-      data: JSON.stringify(this.state.expenses),
-      contentType: 'application/json',
-      dataType: 'json'})
-    .done(this._addedOk);
-
     event.preventDefault();
+
+    RequestJson.post('/api/expenses', this.state.expenses)
+               .then(this._addedOk);
   },
   render() {
     var onChangeForExpense = i => this._updateExpense.bind(this, i);

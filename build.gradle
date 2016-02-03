@@ -18,7 +18,7 @@ task compileJsx(type: NodeTask, dependsOn: 'npmInstall') {
     inputs.dir jsxDir
     outputs.dir libDir
 
-    script = file('node_modules/babel-core')
+    script = file('node_modules/babel-cli/bin/babel')
     args = [jsxDir, '--out-dir', libDir]
 }
 

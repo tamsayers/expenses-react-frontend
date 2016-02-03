@@ -6,14 +6,21 @@ const RequestJson = {
     var deferred = Q.defer();
     $.getJSON(resource, params)
      .done(deferred.resolve)
-     .fail((jqxhr, textStatus, error) => {
-       deferred.reject(jqxhr)
-     });
+     .fail(deferred.reject);
 
     return deferred.promise;
   },
   post(resource, data) {
     var deferred = Q.defer();
+    $.ajax({
+      url: resource,
+      method: 'POST',
+      data: data,
+      contentType: 'application/json',
+      dataType: 'json'
+    })
+    .done(deferred.resolve)
+    .fail(deferred.reject);
 
     return deferred.promise;
   }
