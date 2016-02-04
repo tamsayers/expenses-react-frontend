@@ -1,8 +1,8 @@
 var React = require('react'),
-    Inputs = requre('../form/InputsWithLabel'),
+    Inputs = require('../form/InputsWithLabel'),
     InputStateMixin = require('../../mixins/InputStateMixin');
 
-var Main = React.createClass({
+var Login = React.createClass({
   mixins: [InputStateMixin],
   getInitialState() {
     return {};
@@ -12,7 +12,7 @@ var Main = React.createClass({
   },
   render() {
     return (
-      <form name="login-form" class="login-form" onSubmit={this._onSubmit}>
+      <form name="login-form" classNane="login-form" onSubmit={this._onSubmit}>
         <fieldset>
           <legend>Please enter your logine details:</legend>
           <Inputs.Text name="username" value={this.state.username} onChange={this.inputValueChange} autofocus={true}>Username</Inputs.Text>
@@ -22,3 +22,5 @@ var Main = React.createClass({
     );
   }
 });
+
+module.exports = Login;

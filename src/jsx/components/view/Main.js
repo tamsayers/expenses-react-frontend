@@ -1,29 +1,33 @@
-var React = require('react');
-var QueryContent = require('../query/Content.js');
-var NavMenu = require('../navigation/Menu.js');
+var React = require('react'),
+    Expenses = require('./Expenses'),
+    Login = require('./Login'),
+    ViewStore = require('../../stores/ViewStore');
 
 var Main = React.createClass({
   getInitialState() {
     return {
-      content: QueryContent
+      view: ViewStore.current()
     };
   },
-  _updateContent(Component) { return e =>
+  componentDidMount: function() {
+    ViewStore.bind('change', this._viewChanged);
+  },
+  componentWillUnmount: function() {
+    ViewStore.unbind('change', this._viewChanged);
+  },
+  _viewChanged() {
     this.setState({
-      content: Component
+      view: ViewStore.current()
     });
   },
   render() {
-    return (
-      <div>
-        <div id="header">
-          <div id="header__menu">
-            <NavMenu updateContent={this._updateContent}/>
-          </div>
-        </div>
-        <this.state.content />
-      </div>
-    );
+    var view;
+    if (this.state.view == 'login') {
+      view = <Login />;
+    } else {
+      view = <Expenses />;
+    }
+    return view;
   }
 });
 
