@@ -9,7 +9,7 @@ module.exports = React.createClass({
   mixins: [InputStateMixin],
   getInitialState() {
     return {
-      query: {},
+      inputs: {},
       results: []
     };
   },
@@ -18,19 +18,19 @@ module.exports = React.createClass({
   },
   _queryParams() {
     var params = {};
-    if (this.state.query.supplier) {
-      params.supplier = this.state.query.supplier;
+    if (this.state.inputs.supplier) {
+      params.supplier = this.state.inputs.supplier;
     }
 
     return params;
   },
   _submitQuery(event) {
     event.preventDefault();
-    RequestJson.get('/api/expenses/' + this.state.query.from + '/to/' + this.state.query.till, this._queryParams())
+    RequestJson.get('/api/expenses/' + this.state.inputs.from + '/to/' + this.state.inputs.till, this._queryParams())
                .then(this._updateResults);
   },
   _downloadCsv(event) {
-    var url = '/api/expenses/' + this.state.query.from + '/to/' + this.state.query.till;
+    var url = '/api/expenses/' + this.state.inputs.from + '/to/' + this.state.inputs.till;
     var queryParams = this._queryParams();
     queryParams.contentType = 'csv';
 
@@ -39,7 +39,10 @@ module.exports = React.createClass({
   render() {
     return (
       <div>
-        <QueryForm query={this.state.query} onChange={this.inputValueChange} onSubmit={this._submitQuery} downloadCsv={this._downloadCsv}/>
+        <QueryForm query={this.state.inputs}
+                   onChange={this.inputValueChange}
+                   onSubmit={this._submitQuery}
+                   downloadCsv={this._downloadCsv}/>
         <ResultsTable data={this.state.results} />
       </div>
     );

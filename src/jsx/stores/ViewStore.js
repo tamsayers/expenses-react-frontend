@@ -1,13 +1,14 @@
 const AppDispatcher = require('../dispatcher/AppDispatcher'),
-      MicroEvent = require('microevent');
+      MicroEvent = require('microevent'),
+      ViewConstants = require('../constants/ViewConstants');
 
-var currentPage = 'login';
+var currentPage = ViewConstants.VIEW.LOGIN;
 
 function ViewStore() {
   AppDispatcher.register(payload => {
-    if (payload.source == 'VIEW_ACTION') {
+    if (payload.source === ViewConstants.VIEW_ACTION) {
       currentPage = payload.action;
-      this.trigger('change');
+      this.trigger(ViewConstants.VIEW_CHANGE_EVENT);
     }
 
     return true;

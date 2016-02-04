@@ -15,7 +15,7 @@ const RequestJson = {
     $.ajax({
       url: resource,
       method: 'POST',
-      data: data,
+      data: JSON.stringify(data),
       contentType: 'application/json',
       dataType: 'json'
     })

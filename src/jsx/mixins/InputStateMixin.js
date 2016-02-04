@@ -5,8 +5,8 @@ const InputStateMixin = {
     // some weird React event pooling stuff requires copy of values to new object.
     var e = $.extend({}, event);
     this.setState(function(previousState, currentProps) {
-      previousState.query[e.target.name] = e.target.value;
-      return {query: previousState.query};
+      previousState.inputs[e.target.name] = e.target.value;
+      return { inputs: previousState.inputs };
     });
   }
 };

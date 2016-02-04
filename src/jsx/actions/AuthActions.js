@@ -1,10 +1,20 @@
-const AppDispatcher = require('../dispatcher/AppDispatcher');
+const AppDispatcher = require('../dispatcher/AppDispatcher'),
+      RequestJson = require('../services/RequestJson'),
+      ViewNames = require('../constants/ViewConstants').VIEW;
 
 module.exports = {
   login(username, password) {
-    AppDispatcher.handleViewAction('expenses');
+    RequestJson.post('/api/authenticate', {
+      username: username,
+      password: password
+    })
+    .then(response => {
+      console.log(response);
+      AppDispatcher.handleViewAction(ViewNames.EXPENSES);
+    })
+    .catch(console.error);
   },
   unAuthorized() {
-    AppDispatcher.handleViewAction('login');
+    AppDispatcher.handleViewAction(ViewNames.LOGIN);
   }
 };

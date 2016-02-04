@@ -1,7 +1,8 @@
 var React = require('react'),
     Expenses = require('./Expenses'),
     Login = require('./Login'),
-    ViewStore = require('../../stores/ViewStore');
+    ViewStore = require('../../stores/ViewStore'),
+    ViewConstants = require('../../constants/ViewConstants');
 
 var Main = React.createClass({
   getInitialState() {
@@ -10,10 +11,10 @@ var Main = React.createClass({
     };
   },
   componentDidMount: function() {
-    ViewStore.bind('change', this._viewChanged);
+    ViewStore.bind(ViewConstants.VIEW_CHANGE_EVENT, this._viewChanged);
   },
   componentWillUnmount: function() {
-    ViewStore.unbind('change', this._viewChanged);
+    ViewStore.unbind(ViewConstants.VIEW_CHANGE_EVENT, this._viewChanged);
   },
   _viewChanged() {
     this.setState({
@@ -22,10 +23,10 @@ var Main = React.createClass({
   },
   render() {
     var view;
-    if (this.state.view == 'login') {
-      view = <Login />;
-    } else {
+    if (this.state.view === ViewConstants.VIEW.EXPENSES) {
       view = <Expenses />;
+    } else {
+      view = <Login />;
     }
     return view;
   }

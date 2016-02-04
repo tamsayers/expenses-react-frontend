@@ -7,19 +7,21 @@ var React = require('react'),
 var Login = React.createClass({
   mixins: [InputStateMixin],
   getInitialState() {
-    return {};
+    return {
+      inputs: {}
+    };
   },
   _onSubmit(event) {
     event.preventDefault();
-    AuthActions.login(this.state.username, this.state.password);
+    AuthActions.login(this.state.inputs.username, this.state.inputs.password);
   },
   render() {
     return (
-      <form name="login-form" classNane="login-form" onSubmit={this._onSubmit}>
+      <form name="login-form" className="login-form" onSubmit={this._onSubmit}>
         <fieldset>
           <legend>Please enter your logine details:</legend>
-          <Inputs.Text name="username" value={this.state.username} onChange={this.inputValueChange} autofocus={true}>Username</Inputs.Text>
-          <Inputs.Text name="password" value={this.state.password} onChange={this.inputValueChange}>Password</Inputs.Text>
+          <Inputs.Text name="username" value={this.state.inputs.username} onChange={this.inputValueChange} autofocus={true}>Username</Inputs.Text>
+          <Inputs.Text name="password" value={this.state.inputs.password} onChange={this.inputValueChange}>Password</Inputs.Text>
           <Button.Submit />
         </fieldset>
       </form>
