@@ -1,11 +1,21 @@
-var Dispatcher = require('flux').Dispatcher;
-var assign = require('object-assign');
+const Dispatcher = require('flux').Dispatcher,
+      ViewConstants = require('../constants/ViewConstants'),
+      AddConstants = require('../constants/AddConstants'),
+      assign = require('object-assign');
 
 class AppDispatcher extends Dispatcher {
   handleViewAction(action) {
     this.dispatch({
-      source: 'VIEW_ACTION',
+      source: ViewConstants.VIEW_ACTION,
       action: action
+    });
+  }
+
+  handleAddAction(action, data) {
+    this.dispatch({
+      source: AddConstants.ADD_ACTION,
+      action: action,
+      data: data
     });
   }
 }

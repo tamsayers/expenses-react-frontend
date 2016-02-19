@@ -8,10 +8,7 @@ module.exports = {
       username: username,
       password: password
     })
-    .then(response => {
-      console.log(response);
-      AppDispatcher.handleViewAction(ViewNames.EXPENSES);
-    })
+    .then(response => AppDispatcher.handleViewAction(ViewNames.EXPENSES))
     .catch(console.error);
   },
   unAuthorized() {
