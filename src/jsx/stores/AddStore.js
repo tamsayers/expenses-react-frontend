@@ -13,6 +13,17 @@ function AddStore() {
       if (payload.action === AddConstants.REMOVE_EXPENSE) {
         expensesArray.splice(payload.data.index, 1);
       }
+      if (payload.action === AddConstants.UPDATE_EXPENSE) {
+        var setVal = function(expense, props) {
+          if (props.length > 1) {
+            setVal(expense[props.shift()], props);
+          } else {
+            obj[expense[0]] = payload.data.value;
+          }
+        };
+
+        setVal(expensesArray[payload.data.index], payload.data.property.split('.'));
+      }
 
       this.trigger(ViewConstants.ADD_EVENT);
     }
