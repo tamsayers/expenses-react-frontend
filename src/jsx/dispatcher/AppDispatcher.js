@@ -1,5 +1,6 @@
 const Dispatcher = require('flux').Dispatcher,
       LoginConstants = require('../constants/LoginConstants'),
+      QueryConstants = require('../constants/QueryConstants'),
       ViewConstants = require('../constants/ViewConstants'),
       AddConstants = require('../constants/AddConstants'),
       assign = require('object-assign');
@@ -23,6 +24,14 @@ class AppDispatcher extends Dispatcher {
   handleLoginAction(action, data) {
     this.dispatch({
       source: LoginConstants.LOGIN_ACTION,
+      action: action,
+      data: data
+    });
+  }
+
+  handleQueryAction(action, data) {
+    this.dispatch({
+      source: QueryConstants.QUERY_ACTION,
       action: action,
       data: data
     });

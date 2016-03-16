@@ -5,4 +5,4 @@ module.exports = {
   loggedId() {
     AppDispatcher.handleViewAction(ViewConstants.LOGGED_IN);
   }
-}
+};

@@ -40,9 +40,7 @@ function AddStore() {
     return true;
   });
 
-  this.expenses = function() {
-    return expensesArray;
-  }
+  this.expenses = () => expensesArray;
 }
 
 MicroEvent.mixin(AddStore);

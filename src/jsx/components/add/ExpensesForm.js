@@ -38,6 +38,7 @@ module.exports = React.createClass({
     AddActions.updateExpense(i, event.target.name, value());
   },
   _addedOk() {
+    // add view change action
     ReactDOM.render(
       <QueryContent />,
       document.getElementById('content')

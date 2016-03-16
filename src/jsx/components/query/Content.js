@@ -1,21 +1,29 @@
 const React = require('react'),
-    QueryForm = require('./QueryForm.js'),
-    ResultsTable = require('./ResultsTable.js'),
-    InputStateMixin = require('../../mixins/InputStateMixin'),
-    RequestJson = require('../../services/RequestJson'),
-    LoginStore = require('../../stores/LoginStore'),
-    $ = require('jquery');
+      QueryForm = require('./QueryForm.js'),
+      ResultsTable = require('./ResultsTable.js'),
+      InputStateMixin = require('../../mixins/InputStateMixin'),
+      QueryActions = require('../../actions/QueryActions'),
+      QueryStore = require('../../stores/QueryStore'),
+      QueryConstants = require('../../constants/QueryConstants'),
+      LoginStore = require('../../stores/LoginStore'),
+      $ = require('jquery');
 
 module.exports = React.createClass({
   mixins: [InputStateMixin],
   getInitialState() {
     return {
       inputs: {},
-      results: []
+      results: QueryStore.results()
     };
   },
+  componentDidMount() {
+    QueryStore.bind(QueryConstants.NEW_RESULTS, this._updateResults);
+  },
+  componentWillUnmount() {
+    QueryStore.unbind(QueryConstants.NEW_RESULTS, this._updateResults);
+  },
   _updateResults(data) {
-    this.setState({results: data});
+    this.setState({results: QueryStore.results()});
   },
   _queryParams() {
     var params = {};
@@ -27,8 +35,7 @@ module.exports = React.createClass({
   },
   _submitQuery(event) {
     event.preventDefault();
-    RequestJson.get('/api/expenses/' + this.state.inputs.from + '/to/' + this.state.inputs.till, this._queryParams(), LoginStore.authToken())
-               .then(this._updateResults);
+    QueryActions.search(LoginStore.authToken(), this.state.inputs.from, this.state.inputs.till, this._queryParams());
   },
   _downloadCsv(event) {
     var url = '/api/expenses/' + this.state.inputs.from + '/to/' + this.state.inputs.till;

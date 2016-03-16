@@ -26,9 +26,7 @@ function LoginStore() {
     return true;
   });
 
-  this.authToken = () => {
-    return authToken;
-  }
+  this.authToken = () => authToken;
 }
 
 MicroEvent.mixin(LoginStore);

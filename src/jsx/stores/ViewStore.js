@@ -20,9 +20,7 @@ function ViewStore() {
     return true;
   });
 
-  this.current = function() {
-    return currentPage;
-  }
+  this.current = () => currentPage;
 }
 
 MicroEvent.mixin(ViewStore);
