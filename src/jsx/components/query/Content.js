@@ -3,6 +3,7 @@ const React = require('react'),
     ResultsTable = require('./ResultsTable.js'),
     InputStateMixin = require('../../mixins/InputStateMixin'),
     RequestJson = require('../../services/RequestJson'),
+    LoginStore = require('../../stores/LoginStore'),
     $ = require('jquery');
 
 module.exports = React.createClass({
@@ -26,7 +27,7 @@ module.exports = React.createClass({
   },
   _submitQuery(event) {
     event.preventDefault();
-    RequestJson.get('/api/expenses/' + this.state.inputs.from + '/to/' + this.state.inputs.till, this._queryParams())
+    RequestJson.get('/api/expenses/' + this.state.inputs.from + '/to/' + this.state.inputs.till, this._queryParams(), LoginStore.authToken())
                .then(this._updateResults);
   },
   _downloadCsv(event) {

@@ -3,6 +3,8 @@ const AppDispatcher = require('../dispatcher/AppDispatcher'),
       RequestJson = require('../services/RequestJson'),
       LoginConstants = require('../constants/LoginConstants');
 
+var authToken;
+
 function LoginStore() {
   this.dispatchToken = AppDispatcher.register(payload => {
     if (payload.source === LoginConstants.LOGIN_ACTION) {
@@ -12,7 +14,7 @@ function LoginStore() {
           password: payload.data.password
         })
         .then(response => {
-          this.authToken = payload.data.token;
+          authToken = response.token;
           this.trigger(LoginConstants.LOGIN_SUCCESFUL_EVENT);
         })
         .catch(err => {
@@ -23,6 +25,10 @@ function LoginStore() {
 
     return true;
   });
+
+  this.authToken = () => {
+    return authToken;
+  }
 }
 
 MicroEvent.mixin(LoginStore);

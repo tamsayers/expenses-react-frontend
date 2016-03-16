@@ -1,5 +1,4 @@
 const AppDispatcher = require('../dispatcher/AppDispatcher'),
-      RequestJson = require('../services/RequestJson'),
       LoginConstants = require('../constants/LoginConstants');
 
 module.exports = {

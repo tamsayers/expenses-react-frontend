@@ -1,5 +1,6 @@
 const AppDispatcher = require('../dispatcher/AppDispatcher'),
       MicroEvent = require('microevent'),
+      RequestJson = require('../services/RequestJson'),
       AddConstants = require('../constants/AddConstants');
 
 function AddStore() {
@@ -26,9 +27,10 @@ function AddStore() {
       }
 
       if (payload.action === AddConstants.SAVE) {
-        RequestJson.post('/api/expenses', expenses)
+        RequestJson.post('/api/expenses', expensesArray, payload.data.authToken)
                    .then(() => {
                      console.log('expenses saved');
+                     // trigger successful save action
                    });
       }
 

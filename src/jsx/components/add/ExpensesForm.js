@@ -1,6 +1,7 @@
 var React = require('react'),
     ReactDOM = require('react'),
     AddStore = require('../../stores/AddStore'),
+    LoginStore = require('../../stores/LoginStore'),
     AddConstants = require('../../constants/AddConstants'),
     AddActions = require('../../actions/AddExpensesActions'),
     RequestJson = require('../../services/RequestJson'),
@@ -17,12 +18,12 @@ module.exports = React.createClass({
     return storedState();
   },
   componentDidMount() {
-    AddStore.bind(AddConstants.ADD_EVENT, this._viewChanged);
+    AddStore.bind(AddConstants.ADD_EVENT, this._stateChanged);
   },
   componentWillUnmount() {
-    AddStore.unbind(AddConstants.ADD_EVENT, this._viewChanged);
+    AddStore.unbind(AddConstants.ADD_EVENT, this._stateChanged);
   },
-  _viewChanged() {
+  _stateChanged() {
     this.setState(storedState());
   },
   _updateExpense(i, event) {
@@ -42,12 +43,15 @@ module.exports = React.createClass({
       document.getElementById('content')
     );
   },
-
+  _onSubmit(event) {
+    event.preventDefault();
+    AddActions.save(LoginStore.authToken());
+  },
   render() {
     var onChangeExpense = i => this._updateExpense.bind(this, i);
     var onRemoveExpense = i => AddActions.removeExpense.bind(this, i);
     return (
-      <form name="expenses-form" className="expenses-form" onSubmit={AddActions.save}>
+      <form name="expenses-form" className="expenses-form" onSubmit={this._onSubmit}>
         {this.state.expenses.map(function(expense, i) {
           return <InputExpense key={i} rowIndex={i} data={expense} onChange={onChangeExpense(i)} onDelete={onRemoveExpense(i)}/>;
         })}

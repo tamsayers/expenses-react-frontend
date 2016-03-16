@@ -11,8 +11,10 @@ module.exports = {
       index: index
     });
   },
-  save() {
-    AppDispatcher.handleAddAction(AddConstants.SAVE);
+  save(authToken) {
+    AppDispatcher.handleAddAction(AddConstants.SAVE, {
+      authToken: authToken
+    });
   },
   updateExpense(index, property, value) {
     AppDispatcher.handleAddAction(AddConstants.UPDATE_EXPENSE, {
