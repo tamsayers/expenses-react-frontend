@@ -1,4 +1,5 @@
 const VIEW_ACTION = 'VIEW_ACTION',
+      LOGGED_IN = 'logged-in',
       VIEW_CHANGE_EVENT = 'view-change';
 
 const LOGIN_VIEW = 'login',
@@ -16,6 +17,10 @@ class ViewNames {
 class ViewConstants {
   static get VIEW_ACTION() {
     return VIEW_ACTION;
+  }
+
+  static get LOGGED_IN() {
+    return LOGGED_IN;
   }
 
   static get VIEW_CHANGE_EVENT() {

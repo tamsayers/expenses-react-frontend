@@ -1,4 +1,5 @@
 const AppDispatcher = require('../dispatcher/AppDispatcher'),
+      RequestJson = require('../services/RequestJson'),
       AddConstants = require('../constants/AddConstants');
 
 module.exports = {
@@ -10,9 +11,8 @@ module.exports = {
       index: index
     });
   },
-  save(expenses) {
-    RequestJson.post('/api/expenses', expenses)
-               .then(AppDispatcher.handleAddAction(AddConstants.SAVE_SUCCESSFUL));
+  save() {
+    AppDispatcher.handleAddAction(AddConstants.SAVE);
   },
   updateExpense(index, property, value) {
     AppDispatcher.handleAddAction(AddConstants.UPDATE_EXPENSE, {

@@ -1,7 +1,7 @@
 const ADD_ACTION = 'ADD_EXPENSE_ACTION',
       NEW_EXPENSE = 'new-expense',
       REMOVE_EXPENSE = 'remove-expense',
-      SAVE_SUCCESSFUL = 'expenses-saved',
+      SAVE = 'save-expenses',
       UPDATE_EXPENSE = 'update-expense',
       ADD_EVENT = 'expense-added';
 
@@ -22,8 +22,8 @@ class AddConstants {
     return ADD_EVENT;
   }
 
-  static get SAVE_SUCCESSFUL() {
-    return SAVE_SUCCESSFUL;
+  static get SAVE() {
+    return SAVE;
   }
 
   static get UPDATE_EXPENSE() {

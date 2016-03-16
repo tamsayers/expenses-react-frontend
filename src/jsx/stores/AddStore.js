@@ -5,7 +5,7 @@ const AppDispatcher = require('../dispatcher/AppDispatcher'),
 function AddStore() {
   const expensesArray = [{cost: {}}];
 
-  AppDispatcher.register(payload => {
+  this.dispatchToken = AppDispatcher.register(payload => {
     if (payload.source === AddConstants.ADD_ACTION) {
       if (payload.action === AddConstants.NEW_EXPENSE) {
         expensesArray.push({cost: {}});
@@ -18,14 +18,21 @@ function AddStore() {
           if (props.length > 1) {
             setVal(expense[props.shift()], props);
           } else {
-            obj[expense[0]] = payload.data.value;
+            expense[props[0]] = payload.data.value;
           }
         };
 
         setVal(expensesArray[payload.data.index], payload.data.property.split('.'));
       }
 
-      this.trigger(ViewConstants.ADD_EVENT);
+      if (payload.action === AddConstants.SAVE) {
+        RequestJson.post('/api/expenses', expenses)
+                   .then(() => {
+                     console.log('expenses saved');
+                   });
+      }
+
+      this.trigger(AddConstants.ADD_EVENT);
     }
 
     return true;
