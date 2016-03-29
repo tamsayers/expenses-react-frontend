@@ -3,6 +3,7 @@ const Dispatcher = require('flux').Dispatcher,
       QueryConstants = require('../constants/QueryConstants'),
       ViewConstants = require('../constants/ViewConstants'),
       AddConstants = require('../constants/AddConstants'),
+      ExpensesConstants = require('../constants/ExpensesConstants'),
       assign = require('object-assign');
 
 class AppDispatcher extends Dispatcher {
@@ -34,6 +35,13 @@ class AppDispatcher extends Dispatcher {
       source: QueryConstants.QUERY_ACTION,
       action: action,
       data: data
+    });
+  }
+
+  handleExpensesAction(action) {
+    this.dispatch({
+      source: ExpensesConstants.EXPENSES_ACTION,
+      action: action
     });
   }
 }

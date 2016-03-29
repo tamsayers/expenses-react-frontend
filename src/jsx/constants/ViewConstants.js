@@ -1,6 +1,6 @@
 const VIEW_ACTION = 'VIEW_ACTION',
       LOGGED_IN = 'logged-in',
-      VIEW_CHANGE_EVENT = 'view-change';
+      VIEW_CHANGE_EVENT = 'main-view-change';
 
 const LOGIN_VIEW = 'login',
       EXPENSES_VIEW = 'expenses';
