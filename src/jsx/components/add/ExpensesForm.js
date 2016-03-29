@@ -1,13 +1,13 @@
-var React = require('react'),
-    ReactDOM = require('react'),
-    AddStore = require('../../stores/AddStore'),
-    LoginStore = require('../../stores/LoginStore'),
-    AddConstants = require('../../constants/AddConstants'),
-    AddActions = require('../../actions/AddExpensesActions'),
-    RequestJson = require('../../services/RequestJson'),
-    InputExpense = require('./InputExpense.js'),
-    QueryContent = require('../query/Content.js'),
-    Button = require('../utils/Button.js');
+const React = require('react'),
+      ReactDOM = require('react'),
+      AddStore = require('../../stores/AddStore'),
+      LoginStore = require('../../stores/LoginStore'),
+      AddConstants = require('../../constants/AddConstants'),
+      AddActions = require('../../actions/AddExpensesActions'),
+      RequestJson = require('../../services/RequestJson'),
+      InputExpense = require('./InputExpense.js'),
+      QueryContent = require('../query/Content.js'),
+      Button = require('../utils/Button.js');
 
 const storedState = () => ({
   expenses: AddStore.expenses()
@@ -19,9 +19,11 @@ module.exports = React.createClass({
   },
   componentDidMount() {
     AddStore.bind(AddConstants.ADD_EVENT, this._stateChanged);
+    AddStore.bind(AddConstants.SUCCESSFUL_SAVE, this._addedOk);
   },
   componentWillUnmount() {
     AddStore.unbind(AddConstants.ADD_EVENT, this._stateChanged);
+    AddStore.unbind(AddConstants.SUCCESSFUL_SAVE, this._addedOk);
   },
   _stateChanged() {
     this.setState(storedState());
@@ -38,11 +40,7 @@ module.exports = React.createClass({
     AddActions.updateExpense(i, event.target.name, value());
   },
   _addedOk() {
-    // add view change action
-    ReactDOM.render(
-      <QueryContent />,
-      document.getElementById('content')
-    );
+    this.props.updateContent(QueryContent)();
   },
   _onSubmit(event) {
     event.preventDefault();

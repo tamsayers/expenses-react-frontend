@@ -21,7 +21,9 @@ var Expenses = React.createClass({
             <NavMenu updateContent={this._updateContent}/>
           </div>
         </div>
-        <this.state.content />
+        <div id="content">
+          <this.state.content updateContent={this._updateContent}/>
+        </div>
       </div>
     );
   }

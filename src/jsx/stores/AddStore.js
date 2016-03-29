@@ -29,8 +29,7 @@ function AddStore() {
       if (payload.action === AddConstants.SAVE) {
         RequestJson.post('/api/expenses', expensesArray, payload.data.authToken)
                    .then(() => {
-                     console.log('expenses saved');
-                     // trigger successful save action
+                     this.trigger(AddConstants.SUCCESSFUL_SAVE);
                    });
       }
 
