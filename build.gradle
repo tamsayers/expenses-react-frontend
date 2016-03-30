@@ -19,11 +19,11 @@ task compileJsx(type: NodeTask, dependsOn: 'npmInstall') {
     outputs.dir libDir
 
     script = file('node_modules/babel-cli/bin/babel')
-    args = [jsxDir, '--out-dir', libDir]
+    args = [jsxDir, '--out-dir', libDir, '-i', '**.spec.js']
 }
 
 task test(type: NpmTask, dependsOn: 'compileJsx') {
-    inputs.file '__tests__'
+    inputs.file 'src/jsx/**/__tests__/**'
 
     args = ['test']
 }

@@ -27,6 +27,7 @@
   "jest": {
     "testRunner": "<rootDir>/node_modules/jest-cli/src/testRunners/jasmine/jasmine2.js",
     "scriptPreprocessor": "<rootDir>/node_modules/babel-jest",
+    "testPathDirs": [ "<rootDir>/src/jsx" ],
     "unmockedModulePathPatterns": [
       "<rootDir>/node_modules/react",
       "<rootDir>/node_modules/react-dom",

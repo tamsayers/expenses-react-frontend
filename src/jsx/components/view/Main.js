@@ -6,7 +6,7 @@ const React = require('react'),
 
 const storedState = () => {
   var view;
-  if (ViewStore.current() === ViewConstants.VIEW.EXPENSES) {
+  if (ViewStore.currentView === ViewConstants.VIEW.EXPENSES) {
     view = Expenses;
   } else {
     view = Login;
