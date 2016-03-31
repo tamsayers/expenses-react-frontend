@@ -1,15 +1,16 @@
 const ViewConstants = require('../../constants/ViewConstants');
 
-const ViewPayloadHandler = {
+const viewFor = action => {
+  switch (action) {
+    case ViewConstants.LOGGED_IN: return ViewConstants.VIEW.EXPENSES;
+    default: return ViewConstants.VIEW.LOGIN;
+  };
+};
 
+const ViewPayloadHandler = {
   handle: function(payload) {
     if (payload.source === ViewConstants.VIEW_ACTION) {
-      // if(payload.action === ViewConstants.LOGGED_IN) {
-      //   this.currentView = ViewConstants.VIEW.EXPENSES;
-      // } else {
-        this.currentView = ViewConstants.VIEW.LOGIN;
-      // }
-
+      this.currentView = viewFor(payload.action)
       this.trigger(ViewConstants.VIEW_CHANGE_EVENT);
     }
     return true;
