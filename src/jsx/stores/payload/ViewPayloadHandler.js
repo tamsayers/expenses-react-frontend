@@ -7,11 +7,11 @@ const viewFor = action => {
   };
 };
 
-const ViewPayloadHandler = {
-  handle: function(payload) {
+function ViewPayloadHandler(store) {
+  this.handle = function(payload) {
     if (payload.source === ViewConstants.VIEW_ACTION) {
-      this.currentView = viewFor(payload.action)
-      this.trigger(ViewConstants.VIEW_CHANGE_EVENT);
+      store.currentView = viewFor(payload.action)
+      store.trigger(ViewConstants.VIEW_CHANGE_EVENT);
     }
     return true;
   }

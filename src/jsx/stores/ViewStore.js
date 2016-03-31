@@ -1,24 +1,14 @@
 const AppDispatcher = require('../dispatcher/AppDispatcher'),
       MicroEvent = require('microevent'),
-      ViewConstants = require('../constants/ViewConstants');
+      ViewConstants = require('../constants/ViewConstants'),
+      ViewPayloadHandler = require('./payload/ViewPayloadHandler');
 
 var currentPage = ViewConstants.VIEW.LOGIN;
 
 function ViewStore() {
-  this.dispatchToken = AppDispatcher.register(payload => {
-    if (payload.source === ViewConstants.VIEW_ACTION) {
-      if(payload.action === ViewConstants.LOGGED_IN) {
-        this.currentView = ViewConstants.VIEW.EXPENSES;
-      } else {
-        this.currentView = ViewConstants.VIEW.LOGIN;
-      }
+  var payloadHandler = new ViewPayloadHandler(this);
 
-      this.trigger(ViewConstants.VIEW_CHANGE_EVENT);
-    }
-
-    return true;
-  });
-
+  this.dispatchToken = AppDispatcher.register(payloadHandler.handle);
   this.currentView = ViewConstants.VIEW.LOGIN;
 }
 

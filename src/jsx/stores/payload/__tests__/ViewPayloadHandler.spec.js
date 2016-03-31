@@ -5,65 +5,59 @@ const ViewPayloadHandler = require('../ViewPayloadHandler'),
       ViewConstants = require('../../../constants/ViewConstants');
 
 describe('ViewTemplateHandler', () => {
-  var handle, binding, payload;
+  var payloadHandler, store;
 
   beforeEach(() => {
-    payload = {
-      source: ''
-    }
-    binding = {
+    store = {
       trigger: jest.fn()
     };
-    handle = ViewPayloadHandler.handle.bind(binding);
+    payloadHandler = new ViewPayloadHandler(store);
   });
 
-  it('should return true', () => {
-    expect(handle(payload)).toBe(true);
-  });
+  [
+    {
+      name: 'view action source unknown action',
+      payload: {
+        source: ViewConstants.VIEW_ACTION
+      },
+      expectedView: ViewConstants.VIEW.LOGIN,
+      triggerChangeEvent: true
+    },{
+      name: 'view action source logged in action',
+      payload: {
+        source: ViewConstants.VIEW_ACTION,
+        action: ViewConstants.LOGGED_IN
+      },
+      expectedView: ViewConstants.VIEW.EXPENSES,
+      triggerChangeEvent: true
+    },{
+      name: 'non view action source',
+      payload: {},
+      expectedView: undefined,
+      triggerChangeEvent: false
+    }
+  ].forEach(testData => {
+    describe(testData.name, () => {
+      var result;
+      beforeEach(() => {
+        result = payloadHandler.handle(testData.payload);
+      });
 
-  describe('view action source unknown action', () => {
-    beforeEach(() => {
-      payload.source = ViewConstants.VIEW_ACTION;
-      handle(payload);
-    });
+      it('current view correct', () => {
+        expect(store.currentView).toBe(testData.expectedView);
+      });
 
-    it('should set current view to login by default', () => {
-      expect(binding.currentView).toBe(ViewConstants.VIEW.LOGIN);
-    });
+      it('trigger a view change event', () => {
+        if (testData.triggerChangeEvent) {
+          expect(store.trigger).toBeCalledWith(ViewConstants.VIEW_CHANGE_EVENT);
+        } else {
+          expect(store.trigger).not.toBeCalled();
+        }
+      });
 
-    it('should trigger a view change event', () => {
-      expect(binding.trigger).toBeCalledWith(ViewConstants.VIEW_CHANGE_EVENT);
-    });
-  });
-
-  describe('view action source logged in action', () => {
-    beforeEach(() => {
-      payload.source = ViewConstants.VIEW_ACTION;
-      payload.action = ViewConstants.LOGGED_IN;
-      handle(payload);
-    });
-
-    it('should set current view to login by default', () => {
-      expect(binding.currentView).toBe(ViewConstants.VIEW.EXPENSES);
-    });
-
-    it('should trigger a view change event', () => {
-      expect(binding.trigger).toBeCalledWith(ViewConstants.VIEW_CHANGE_EVENT);
-    });
-  });
-
-  describe('non view action source', () => {
-    beforeEach(() => {
-      payload.source = '';
-      handle(payload);
-    });
-
-    it('should not trigger event', () => {
-      expect(binding.trigger).not.toBeCalled();
-    });
-
-    it('should not set the current view', () => {
-      expect(binding.currentView).toBe(undefined);
+      it('should return true', () => {
+        expect(result).toBe(true);
+      });
     });
   });
 });
