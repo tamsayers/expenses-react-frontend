@@ -3,14 +3,24 @@
   "description": "React version of expenses frontend",
   "version": "0.1.0",
   "devDependencies": {
-    "babel-cli": "latest",
     "babel-jest": "latest",
     "babel-preset-es2015": "latest",
     "babel-preset-react": "latest",
     "babel-preset-stage-2": "latest",
     "bower-installer": "latest",
     "browserify": "latest",
+    "del": "^2.2.0",
+    "fileset": "^0.2.1",
     "flux": "^2.1.1",
+    "gulp": "^3.9.1",
+    "gulp-babel": "^6.1.2",
+    "gulp-bower": "0.0.13",
+    "gulp-concat": "^2.6.0",
+    "gulp-sass": "^2.3.1",
+    "gulp-shell": "^0.5.2",
+    "gulp-sourcemaps": "^2.0.0-alpha",
+    "gulp-uglify": "^1.5.3",
+    "gulp-util": "^3.0.7",
     "jest-cli": "latest",
     "jquery": "latest",
     "microevent": "^1.0.0",
@@ -19,15 +29,23 @@
     "q": "^1.4.1",
     "react": "latest",
     "react-addons-test-utils": "latest",
-    "react-dom": "latest"
+    "react-dom": "latest",
+    "require-dir": "^0.3.0",
+    "vinyl-buffer": "^1.0.0",
+    "vinyl-source-stream": "^1.1.0"
+  },
+  "config": {
+    "libDir": "build/lib"
   },
   "scripts": {
+    "compileJsx": "node node_modules/babel-cli/bin/babel src/jsx --out-dir $npm_package_config_libDir -i **.spec.js",
     "test": "jest"
   },
   "jest": {
-    "testRunner": "<rootDir>/node_modules/jest-cli/src/testRunners/jasmine/jasmine2.js",
     "scriptPreprocessor": "<rootDir>/node_modules/babel-jest",
-    "testPathDirs": [ "<rootDir>/src/jsx" ],
+    "testPathDirs": [
+      "<rootDir>/src/jsx"
+    ],
     "unmockedModulePathPatterns": [
       "<rootDir>/node_modules/react",
       "<rootDir>/node_modules/react-dom",
