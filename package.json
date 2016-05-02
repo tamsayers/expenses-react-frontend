@@ -31,14 +31,11 @@
     "react-addons-test-utils": "latest",
     "react-dom": "latest",
     "require-dir": "^0.3.0",
+    "run-sequence": "^1.1.5",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0"
   },
-  "config": {
-    "libDir": "build/lib"
-  },
   "scripts": {
-    "compileJsx": "node node_modules/babel-cli/bin/babel src/jsx --out-dir $npm_package_config_libDir -i **.spec.js",
     "test": "jest"
   },
   "jest": {
@@ -51,13 +48,6 @@
       "<rootDir>/node_modules/react-dom",
       "<rootDir>/node_modules/react-addons-test-utils",
       "<rootDir>/node_modules/jquery"
-    ]
-  },
-  "babel": {
-    "presets": [
-      "react",
-      "es2015",
-      "stage-2"
     ]
   }
 }

@@ -7,14 +7,14 @@ const gulp = require('gulp'),
       gutil = require('gulp-util'),
       config = require('../config');
 
-gulp.task('bundle', () => {
+gulp.task('browserify', () => {
   var b = browserify({
-    entries: `${config.buildLib}/app.js`,
+    entries: config.browserify.entryFile,
     debug: true
   });
 
   return b.bundle()
-    .pipe(source('app.js'))
+    .pipe(source(config.browserify.outputFileName))
     .pipe(buffer())
     .pipe(sourcemaps.init({loadMaps: true}))
         .pipe(uglify())

@@ -1,22 +1,31 @@
+const buildDir = 'build',
+      buildLib = 'build/lib',
+      distDir = 'dist';
+
 module.exports = {
-  distDir: 'dist',
-  sassDir: 'src/css',
-  buildDir: 'build',
-  buildLib: 'build/lib',
   devMode: false,
-  jest: {
+  buildDir: buildDir,
+  distDir: distDir,
+  sass: {
+    dir: 'src/css',
     config: {
-      rootDir: '.',
-      scriptPreprocessor: '<rootDir>/node_modules/babel-jest',
-      testPathDirs: [
-        '<rootDir>/src/jsx'
-      ],
-      unmockedModulePathPatterns: [
-        '<rootDir>/node_modules/react',
-        '<rootDir>/node_modules/react-dom',
-        '<rootDir>/node_modules/react-addons-test-utils',
-        '<rootDir>/node_modules/jquery'
+      includePaths: [ this.dir, 'bower_components']
+    },
+    outputFileName: 'main.css'
+  },
+  babel: {
+    src: ['src/jsx/**/*.js', '!**/__tests__/**'],
+    outputDir: buildLib,
+    config: {
+      presets: [
+        "react",
+        "es2015",
+        "stage-2"
       ]
     }
+  },
+  browserify: {
+    entryFile: `${buildLib}/app.js`,
+    outputFileName: 'bundle.js',
   }
 };
