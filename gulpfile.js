@@ -27,3 +27,5 @@ gulp.task('test:unit', ['babel'], shell.task(['npm test']));
 gulp.task('build', ['css', 'test:unit', 'html'],
   done => runSequence('browserify', done)
 );
+
+gulp.task('default', ['build']);
