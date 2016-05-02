@@ -49,5 +49,12 @@
       "<rootDir>/node_modules/react-addons-test-utils",
       "<rootDir>/node_modules/jquery"
     ]
+  },
+  "babel": {
+    "presets": [
+      "react",
+      "es2015",
+      "stage-2"
+    ]
   }
 }

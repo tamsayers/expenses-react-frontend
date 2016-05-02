@@ -15,14 +15,7 @@ module.exports = {
   },
   babel: {
     src: ['src/jsx/**/*.js', '!**/__tests__/**'],
-    outputDir: buildLib,
-    config: {
-      presets: [
-        "react",
-        "es2015",
-        "stage-2"
-      ]
-    }
+    outputDir: buildLib
   },
   browserify: {
     entryFile: `${buildLib}/app.js`,

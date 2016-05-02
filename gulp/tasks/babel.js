@@ -4,6 +4,6 @@ const gulp = require('gulp'),
 
 gulp.task('babel',
   () => gulp.src(config.babel.src)
-            .pipe(babel(config.babel.config))
+            .pipe(babel())
             .pipe(gulp.dest(config.babel.outputDir))
 );
