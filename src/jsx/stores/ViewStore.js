@@ -5,13 +5,27 @@ const AppDispatcher = require('../dispatcher/AppDispatcher'),
 
 var currentPage = ViewConstants.VIEW.LOGIN;
 
-function ViewStore() {
-  var payloadHandler = new ViewPayloadHandler(this);
+var dispatchTokenSymbol = Symbol();
 
-  this.dispatchToken = AppDispatcher.register(payloadHandler.handle);
-  this.currentView = ViewConstants.VIEW.LOGIN;
+class Store {
+  constructor(PayloadHandler) {
+    const payloadHandler = new PayloadHandler(this);
+
+    this[dispatchTokenSymbol] = AppDispatcher.register(payloadHandler.handle);
+  }
+
+  get dispatchToken() {
+    return this[dispatchTokenSymbol];
+  }
 }
 
-MicroEvent.mixin(ViewStore);
+MicroEvent.mixin(Store);
+
+class ViewStore extends Store {
+  constructor() {
+    super(ViewPayloadHandler);
+    this.currentView = ViewConstants.VIEW.LOGIN;
+  }
+}
 
 module.exports = new ViewStore();
